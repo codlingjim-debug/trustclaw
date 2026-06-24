@@ -1,0 +1,47 @@
+# Corpus Christi Area Power Infrastructure — Shore Power RFP Overview
+
+`corpus-area-power-infrastructure.html` is a self-contained, print-ready **2-page** overview
+prepared to support the shore-power (cold ironing) RFP for the Port of Corpus Christi. It
+includes an inline **SVG location map** (no external assets) showing approximate relationships
+between the ship-channel berths, the AEP Texas 138 kV ring, the 345 kV backbone, key
+substations, and in-zone generation.
+
+## How to use
+
+- Open the `.html` file in any browser.
+- Print / "Save as PDF" — print CSS paginates it cleanly to 2 pages (Letter).
+
+## Contents
+
+1. Regional grid context (ERCOT South/Coastal zone, AEP Texas/ETT, in-zone generation)
+2. Approximate locations — embedded SVG map
+3. Phased buildout — 2 berths → 20 berths (~10 MW → ~100 MW)
+4. ERCOT interconnection for loads of this size (NPRR1234 / PGRR115, LLIS)
+5. Resiliency & power infrastructure (N-1, BESS, microgrid/islanding, power quality)
+
+## Key planning figures
+
+| Item | Value |
+| --- | --- |
+| Typical load per berth (planning) | ~5 MW (HVSC at 6.6/11 kV, IEC/IEEE 80005-1) |
+| Phase 1 pilot (2 berths) | ~8–12 MW, distribution-level |
+| Full build (20 berths) | ~90–120 MW, dedicated 138 kV substation |
+| ERCOT modeling threshold | ≥ 25 MW |
+| ERCOT Large Load Interconnection Study (LLIS) threshold | ≥ 75 MW aggregate at a single site |
+| LLIS study fee | ~$14,000 per request |
+
+## Sources
+
+- [ERCOT — Large Load Integration](https://www.ercot.com/services/rq/large-load-integration)
+- [ERCOT — Large Load Interconnection Process Q&A (PDF)](https://www.ercot.com/files/docs/2025/12/24/Large-Load-Interconnection-Process-Q-A.pdf)
+- [ERCOT — NPRR1234 issue page](https://www.ercot.com/mktrules/issues/NPRR1234)
+- [EPE Consulting — ERCOT's Large Load Interconnection Process Now Approved](https://epeconsulting.com/epe-intelligence/news/ercots-large-load-interconnection-process-now-approved-by-ercots-board-of-directors)
+- [Zero-Emission Grid — NPRR1234 & PGRR115: What Large-Load Developers Must Know](https://www.zeroemissiongrid.com/insights-press-zeg-blog/nprr-1234-pgrr-115/)
+- [AEP Transmission — Texas Projects](https://www.aeptransmission.com/texas/)
+- [Electric Transmission Texas — Barney Davis project](http://www.ettexas.com/Projects/BarneyDavis)
+- [CPS Energy closes acquisition of Talen Energy gas plants (Corpus Christi)](https://newsroom.cpsenergy.com/cps-energy-closes-on-previously-announced-acquisition-of-talen-energy-gas-plants-in-corpus-christi-and-laredo/)
+- [Power Engineering — CPS Energy gas portfolio acquisition](https://www.power-eng.com/gas/turbines/cps-energy-beefs-up-natural-gas-fleet-with-785-million-transaction/)
+- [Cold ironing — overview (Wikipedia)](https://en.wikipedia.org/wiki/Cold_ironing)
+
+> Figures are planning-level approximations for RFP framing. Substation positions on the map are
+> schematic and not to scale; a surveyed GIS alignment should be developed during preliminary engineering.
