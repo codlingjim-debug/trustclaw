@@ -1,10 +1,12 @@
 # Corpus Christi Area Power Infrastructure — Shore Power RFP Overview
 
 `corpus-area-power-infrastructure.html` is a self-contained, print-ready **2-page** overview
-prepared to support the shore-power (cold ironing) RFP for the Port of Corpus Christi. It
-includes an inline **SVG location map** (no external assets) showing approximate relationships
-between the ship-channel berths, the AEP Texas 138 kV ring, the 345 kV backbone, key
-substations, and in-zone generation.
+prepared in support of **our proposal to perform the shore-power (cold ironing) feasibility study**
+for the Port of Corpus Christi. It frames our understanding of the problem and the scope the study
+will evaluate — it is not a final engineering design, and the figures shown are the planning-level
+questions the study will resolve. It includes an inline **SVG location map** (no external assets)
+showing approximate relationships between the ship-channel berths, the AEP Texas 138 kV ring, the
+345 kV backbone, key substations, and in-zone generation.
 
 ## How to use
 
