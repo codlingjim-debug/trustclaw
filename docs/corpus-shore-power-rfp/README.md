@@ -9,10 +9,17 @@ oriented to the USACE Corpus Christi Ship Channel Improvement Project — showin
 reaches (Entrance/Jetty, Lower Bay, Upper Bay, Inner Harbor, and the La Quinta branch), berth
 locations, the AEP Texas 138 kV ring, the 345 kV backbone, key substations, and in-zone generation.
 
+## Files
+
+- `corpus-area-power-infrastructure.html` — editable source; print / "Save as PDF" for a 2-page Letter document.
+- `corpus-area-power-infrastructure.docx` — Word version (same content; the map is embedded as a high-resolution
+  image since Word does not render inline SVG reliably across versions).
+
 ## How to use
 
-- Open the `.html` file in any browser.
-- Print / "Save as PDF" — print CSS paginates it cleanly to 2 pages (Letter).
+- **HTML:** open in any browser, then Print / "Save as PDF" — print CSS paginates it cleanly to 2 pages (Letter).
+- **Word:** open the `.docx` directly in Microsoft Word or Google Docs. A page break separates the two pages;
+  exact pagination can vary slightly by Word version/printer, so confirm before final distribution.
 
 ## Contents
 
