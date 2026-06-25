@@ -288,7 +288,7 @@
 
   <div class="footer">
     <span>Corpus Christi Area Power Infrastructure — Shore Power RFP Overview</span>
-    <span>Page 1 of 2</span>
+    <span>Page 1 of 3</span>
   </div>
 </section>
 
@@ -296,7 +296,7 @@
 <section class="page">
   <div class="header-bar">
     <div>
-      <h1 style="font-size:14px;">Phasing, ERCOT Interconnection &amp; Resiliency</h1>
+      <h1 style="font-size:14px;">Phasing &amp; ERCOT Interconnection</h1>
       <div class="sub">Shore Power (Cold Ironing) — Scope of our Feasibility Study proposal</div>
     </div>
     <div class="meta">ERCOT South / Coastal Zone<br/>AEP Texas service territory</div>
@@ -366,50 +366,95 @@
     </div>
   </div>
 
-  <h2>5. Resiliency &amp; Power Infrastructure</h2>
+  <div class="footer">
+    <span>Corpus Christi Area Power Infrastructure — Shore Power RFP Overview</span>
+    <span>Page 2 of 3</span>
+  </div>
+</section>
+
+<!-- ============================ PAGE 3 ============================ -->
+<section class="page">
+  <div class="header-bar">
+    <div>
+      <h1 style="font-size:14px;">Transmission Reliability, Resiliency &amp; Backup Power</h1>
+      <div class="sub">Shore Power (Cold Ironing) — Scope of our Feasibility Study proposal</div>
+    </div>
+    <div class="meta">ERCOT South / Coastal Zone<br/>AEP Texas service territory</div>
+  </div>
+
+  <h2>5. Transmission Reliability &amp; the Harvey Benchmark</h2>
+  <p>Under normal &ldquo;blue-sky&rdquo; conditions the 345&nbsp;kV and 138&nbsp;kV network is effectively always
+  available: bulk-transmission availability routinely exceeds <strong>99.9%</strong>, and <strong>N-1</strong> design
+  ensures any single line or transformer can fail without dropping load. The correct planning assumption is therefore
+  not that the grid <em>never</em> fails, but that it is highly reliable <strong>except under a major hurricane</strong>
+  — the one scenario a Gulf-coast port must explicitly design for. <strong>Hurricane Harvey</strong> (Category 4,
+  landfall at Rockport/Port Aransas essentially at Corpus Christi, Aug 2017) is the governing benchmark and shows that
+  even the bulk transmission system is not immune:</p>
+  <div class="callout">
+    <strong>Harvey at a glance (AEP Texas / ERCOT South-Coastal):</strong>
+    <ul style="margin:3px 0 0;">
+      <li>Forced outages on <strong>six 345&nbsp;kV lines</strong> and <strong>200+ 69–138&nbsp;kV lines</strong> along the coast.</li>
+      <li>~<strong>25%</strong> of AEP Texas&rsquo;s ~1M customers lost power; ~<strong>3,100+ distribution poles</strong> and
+      ~<strong>500 transmission structures</strong> damaged; ~712 miles of conductor replaced; 5,600 mutual-aid linemen.</li>
+      <li>A <strong>Port Aransas substation was swamped by storm surge</strong> — saltwater destroyed breakers, which had to be replaced.</li>
+      <li>Corpus&rsquo;s <strong>Inner Harbor recovered in days</strong> (~12,000 peak outages); the hardest-hit coastal
+      communities nearest the entrance and La&nbsp;Quinta/Ingleside were <strong>not fully restored for ~2 weeks</strong>.</li>
+    </ul>
+  </div>
+  <div class="callout" style="border-left-color:#0f8a6a;">
+    <strong>Implication for backup power:</strong> shore power <em>cannot</em> assume grid availability during a
+    Harvey-class event. For priority berths, backup/islanding should be sized to a <strong>multi-day to ~2-week
+    restoration window</strong> — favoring on-site/standby generation paired with BESS rather than batteries alone —
+    and coastal substations and switchgear must be <strong>hardened against storm surge and saltwater intrusion</strong>
+    (elevated pads, sealed/submersible-rated breakers) per the Port Aransas failure mode. Because the entrance and
+    La&nbsp;Quinta/Ingleside berths sit nearer the worst-hit zone than the Inner Harbor, backup duration should scale by
+    berth location.
+  </div>
+
+  <h2>6. Resiliency Measures &amp; Backup Power</h2>
   <div class="cols">
     <div class="col">
-      <p>Corpus Christi is a <strong>hurricane-exposed coastal industrial port</strong> (cf. Hurricane Harvey,
-      2017). Shore power is mission-supporting infrastructure for vessels and cargo operations, so the design must
-      assume severe-weather and contingency conditions:</p>
       <ul>
-        <li><strong>N-1 redundancy &amp; looped feeds:</strong> the dedicated port substation should take
-        <strong>dual 138 kV sources</strong> from independent points on the ring so a single line or transformer
-        outage does not de-energize the berths.</li>
-        <li><strong>In-zone generation buffer:</strong> proximity to Barney Davis, Nueces Bay, and Lon Hill
-        (~1.5 GW) supports local voltage and resource adequacy during import constraints.</li>
-        <li><strong>Hardening:</strong> elevated/flood-rated equipment pads, wind-rated structures, and corrosion
-        protection for the marine/salt-air environment.</li>
+        <li><strong>N-1 redundancy &amp; looped feeds:</strong> the dedicated port substation takes <strong>dual
+        138&nbsp;kV sources</strong> from independent points on the ring, so a single line/transformer outage cannot
+        de-energize the berths.</li>
+        <li><strong>In-zone generation buffer:</strong> proximity to Barney Davis, Nueces Bay, and Lon Hill (~1.5&nbsp;GW)
+        supports local voltage and resource adequacy during import constraints.</li>
+        <li><strong>BESS:</strong> peak-shaving, ride-through for momentary disturbances, and smoother load steps as
+        vessels connect/disconnect.</li>
+        <li><strong>On-site / standby generation:</strong> for storm-duration islanding beyond battery economics,
+        sized to priority-berth load over the expected restoration window.</li>
       </ul>
     </div>
     <div class="col">
       <ul>
-        <li><strong>Battery energy storage (BESS):</strong> peak-shaving to manage demand charges, ride-through for
-        momentary disturbances, and smoother load steps as vessels connect/disconnect.</li>
-        <li><strong>Microgrid &amp; islanding:</strong> ability to island critical berths on local generation/BESS
-        during grid outages, with black-start capability for priority docks.</li>
+        <li><strong>Microgrid &amp; islanding:</strong> island critical berths on local generation/BESS during grid
+        outages, with black-start capability for priority docks.</li>
+        <li><strong>Storm hardening:</strong> elevated/flood-rated pads, wind-rated structures, sealed/surge-rated
+        switchgear, and corrosion protection for the marine/salt-air environment.</li>
         <li><strong>Power quality:</strong> frequency conversion (50/60&nbsp;Hz vessels), harmonic mitigation, and
         reactive support so HVSC does not degrade local distribution.</li>
         <li><strong>Redundant conversion:</strong> N+1 shore-power converters/transformers so one failed unit does
         not strand a berth.</li>
       </ul>
-      <div class="callout">
-        <strong>Resiliency target:</strong> berths remain serviceable through a single transmission contingency and
-        can ride through / island during regional disturbances — protecting both air-quality compliance and
-        continuity of port operations.
-      </div>
     </div>
+  </div>
+  <div class="callout">
+    <strong>Resiliency target:</strong> priority berths ride through a single transmission contingency without
+    interruption and can island for a defined storm-restoration window — protecting air-quality compliance and
+    continuity of port operations through the next Harvey-class event.
   </div>
 
   <p class="sub" style="margin-top:6px;"><strong>What our feasibility study will deliver:</strong> (1) surveyed
   per-berth load profiles and coincident-demand diversity; (2) a costed Phase 1 pilot vs. Phase 4 138 kV substation
-  comparison; (3) a mapped ERCOT/AEP Texas interconnection pathway with LLIS timing; and (4) a recommended
-  BESS/microgrid resiliency package with availability targets — concluding with a go/no-go recommendation and a
-  phased implementation roadmap.</p>
+  comparison; (3) a mapped ERCOT/AEP Texas interconnection pathway with LLIS timing; (4) a recommended BESS/microgrid
+  resiliency package with availability targets; and (5) a <strong>storm-resilience basis of design benchmarked to
+  Hurricane Harvey</strong>, sizing backup/islanding to the expected restoration window by berth location —
+  concluding with a go/no-go recommendation and a phased implementation roadmap.</p>
 
   <div class="footer">
-    <span>Sources: USACE/Port Corpus Christi CCSC Channel Improvement Project (2019); ERCOT NPRR1234 / PGRR115; AEP Texas / ETT filings; CPS Energy / Talen; IEC/IEEE 80005-1.</span>
-    <span>Page 2 of 2</span>
+    <span>Sources: USACE/Port Corpus Christi CCSC CIP (2019); ERCOT NPRR1234 / PGRR115 &amp; Harvey response; AEP Texas / ETT filings; U.S. DOE/EIA Harvey event reports; CPS Energy / Talen; IEC/IEEE 80005-1.</span>
+    <span>Page 3 of 3</span>
   </div>
 </section>
 

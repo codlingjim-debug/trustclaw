@@ -1,6 +1,6 @@
 # Corpus Christi Area Power Infrastructure — Shore Power RFP Overview
 
-`corpus-area-power-infrastructure.html` is a self-contained, print-ready **2-page** overview
+`corpus-area-power-infrastructure.html` is a self-contained, print-ready **3-page** overview
 prepared in support of **our proposal to perform the shore-power (cold ironing) feasibility study**
 for the Port of Corpus Christi. It frames our understanding of the problem and the scope the study
 will evaluate — it is not a final engineering design, and the figures shown are the planning-level
@@ -11,23 +11,24 @@ locations, the AEP Texas 138 kV ring, the 345 kV backbone, key substations, and 
 
 ## Files
 
-- `corpus-area-power-infrastructure.html` — editable source; print / "Save as PDF" for a 2-page Letter document.
+- `corpus-area-power-infrastructure.html` — editable source; print / "Save as PDF" for a 3-page Letter document.
 - `corpus-area-power-infrastructure.docx` — Word version (same content; the map is embedded as a high-resolution
   image since Word does not render inline SVG reliably across versions).
 
 ## How to use
 
-- **HTML:** open in any browser, then Print / "Save as PDF" — print CSS paginates it cleanly to 2 pages (Letter).
-- **Word:** open the `.docx` directly in Microsoft Word or Google Docs. A page break separates the two pages;
+- **HTML:** open in any browser, then Print / "Save as PDF" — print CSS paginates it cleanly to 3 pages (Letter).
+- **Word:** open the `.docx` directly in Microsoft Word or Google Docs. Page breaks separate the three pages;
   exact pagination can vary slightly by Word version/printer, so confirm before final distribution.
 
 ## Contents
 
 1. Regional grid context (ERCOT South/Coastal zone, AEP Texas/ETT, in-zone generation)
-2. Approximate locations — embedded SVG map
+2. Channel reaches, berths & power assets — embedded SVG map (USACE CIP geometry)
 3. Phased buildout — 2 berths → 20 berths (~10 MW → ~100 MW)
 4. ERCOT interconnection for loads of this size (NPRR1234 / PGRR115, LLIS)
-5. Resiliency & power infrastructure (N-1, BESS, microgrid/islanding, power quality)
+5. Transmission reliability & the Hurricane Harvey benchmark (345/138 kV outage history)
+6. Resiliency measures & backup power (N-1, BESS, standby gen, microgrid/islanding, storm hardening)
 
 ## Key planning figures
 
@@ -54,6 +55,10 @@ locations, the AEP Texas 138 kV ring, the 345 kV backbone, key substations, and 
 - [CPS Energy closes acquisition of Talen Energy gas plants (Corpus Christi)](https://newsroom.cpsenergy.com/cps-energy-closes-on-previously-announced-acquisition-of-talen-energy-gas-plants-in-corpus-christi-and-laredo/)
 - [Power Engineering — CPS Energy gas portfolio acquisition](https://www.power-eng.com/gas/turbines/cps-energy-beefs-up-natural-gas-fleet-with-785-million-transaction/)
 - [Cold ironing — overview (Wikipedia)](https://en.wikipedia.org/wiki/Cold_ironing)
+- [U.S. EIA — Hurricane Harvey caused electric system outages and affected wind generation in Texas](https://www.eia.gov/todayinenergy/detail.php?id=32892)
+- [Utility Dive — AEP CEO: Harvey 'devastated' transmission, distribution system in south Texas](https://www.utilitydive.com/news/aep-ceo-harvey-devastated-transmission-distribution-system-in-south-tex/504043/)
+- [T&D World — AEP Texas Overcomes Hurricane Destruction](https://www.tdworld.com/electric-utility-operations/article/20970767/aep-texas-overcomes-hurricane-destruction)
+- [ERCOT — Responds to Hurricane Harvey](https://www.ercot.com/help/harvey)
 
 > Figures are planning-level approximations for RFP framing. Substation positions on the map are
 > schematic and not to scale; a surveyed GIS alignment should be developed during preliminary engineering.

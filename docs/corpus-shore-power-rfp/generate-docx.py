@@ -89,12 +89,12 @@ def bullets(items):
         add_runs(p, seg, size=9.5)
 
 
-def callout(segments):
+def callout(segments, color="0B5D8F"):
     p = doc.add_paragraph()
     p.paragraph_format.space_before = Pt(4)
     p.paragraph_format.space_after = Pt(6)
     shade(p, SHADE)
-    left_border_accent(p)
+    left_border_accent(p, color)
     add_runs(p, segments, size=9.5)
     return p
 
@@ -332,34 +332,75 @@ callout([
      "it — and flag this coordination as a defined downstream deliverable for the implementation phase.", False, False),
 ])
 
-# ---------- Section 5: resiliency ----------
-heading("5. Resiliency & Power Infrastructure")
+# ---------- Page 3: reliability + resiliency ----------
+doc.add_page_break()
+
+heading("5. Transmission Reliability & the Harvey Benchmark")
 p = doc.add_paragraph()
 add_runs(p, [
-    ("Corpus Christi is a ", False, False),
-    ("hurricane-exposed coastal industrial port", True, False),
-    (" (cf. Hurricane Harvey, 2017). Shore power is mission-supporting infrastructure, so the design must assume "
-     "severe-weather and contingency conditions:", False, False),
+    ("Under normal “blue-sky” conditions the 345 kV and 138 kV network is effectively always available: "
+     "bulk-transmission availability routinely exceeds ", False, False),
+    ("99.9%", True, False),
+    (", and ", False, False),
+    ("N-1", True, False),
+    (" design ensures any single line or transformer can fail without dropping load. The correct planning "
+     "assumption is therefore not that the grid ", False, False),
+    ("never", False, True),
+    (" fails, but that it is highly reliable ", False, False),
+    ("except under a major hurricane", True, False),
+    (" — the one scenario a Gulf-coast port must explicitly design for. ", False, False),
+    ("Hurricane Harvey", True, False),
+    (" (Category 4, landfall at Rockport/Port Aransas essentially at Corpus Christi, Aug 2017) is the governing "
+     "benchmark and shows that even the bulk transmission system is not immune:", False, False),
 ])
+lead = doc.add_paragraph()
+lead.paragraph_format.space_after = Pt(1)
+add_runs(lead, [("Harvey at a glance (AEP Texas / ERCOT South-Coastal):", True, False)], size=9.5, color=ACCENT)
 bullets([
-    [("N-1 redundancy & looped feeds: ", True, False), ("the dedicated port substation should take dual 138 kV "
-        "sources from independent points on the ring so a single line or transformer outage does not de-energize "
-        "the berths.", False, False)],
+    [("Forced outages on ", False, False), ("six 345 kV lines", True, False), (" and ", False, False),
+     ("200+ 69–138 kV lines", True, False), (" along the coast.", False, False)],
+    [("~25% of AEP Texas’s ~1M customers", True, False), (" lost power; ~3,100+ distribution poles and "
+     "~500 transmission structures damaged; ~712 miles of conductor replaced; 5,600 mutual-aid linemen.", False, False)],
+    [("A Port Aransas substation was swamped by storm surge", True, False), (" — saltwater destroyed breakers, "
+     "which had to be replaced.", False, False)],
+    [("Corpus’s Inner Harbor recovered in days", True, False), (" (~12,000 peak outages); the hardest-hit "
+     "coastal communities nearest the entrance and La Quinta/Ingleside were ", False, False),
+     ("not fully restored for ~2 weeks", True, False), (".", False, False)],
+])
+callout([
+    ("Implication for backup power: ", True, False),
+    ("shore power cannot assume grid availability during a Harvey-class event. For priority berths, "
+     "backup/islanding should be sized to a ", False, False),
+    ("multi-day to ~2-week restoration window", True, False),
+    (" — favoring on-site/standby generation paired with BESS rather than batteries alone — and coastal substations "
+     "and switchgear must be hardened against storm surge and saltwater intrusion (elevated pads, "
+     "sealed/submersible-rated breakers) per the Port Aransas failure mode. Because the entrance and "
+     "La Quinta/Ingleside berths sit nearer the worst-hit zone than the Inner Harbor, backup duration should scale "
+     "by berth location.", False, False),
+], color="0F8A6A")
+
+heading("6. Resiliency Measures & Backup Power")
+bullets([
+    [("N-1 redundancy & looped feeds: ", True, False), ("the dedicated port substation takes dual 138 kV sources "
+        "from independent points on the ring, so a single line/transformer outage cannot de-energize the berths.", False, False)],
     [("In-zone generation buffer: ", True, False), ("proximity to Barney Davis, Nueces Bay, and Lon Hill (~1.5 GW) "
         "supports local voltage and resource adequacy during import constraints.", False, False)],
-    [("Battery energy storage (BESS): ", True, False), ("peak-shaving to manage demand charges, ride-through for "
-        "momentary disturbances, and smoother load steps as vessels connect/disconnect.", False, False)],
-    [("Microgrid & islanding: ", True, False), ("ability to island critical berths on local generation/BESS during "
-        "grid outages, with black-start capability for priority docks.", False, False)],
-    [("Power quality: ", True, False), ("frequency conversion (50/60 Hz vessels), harmonic mitigation, reactive "
-        "support, and N+1 shore-power converters so one failed unit does not strand a berth.", False, False)],
-    [("Hardening: ", True, False), ("elevated/flood-rated equipment pads, wind-rated structures, and corrosion "
-        "protection for the marine/salt-air environment.", False, False)],
+    [("BESS: ", True, False), ("peak-shaving, ride-through for momentary disturbances, and smoother load steps as "
+        "vessels connect/disconnect.", False, False)],
+    [("On-site / standby generation: ", True, False), ("for storm-duration islanding beyond battery economics, "
+        "sized to priority-berth load over the expected restoration window.", False, False)],
+    [("Microgrid & islanding: ", True, False), ("island critical berths on local generation/BESS during grid "
+        "outages, with black-start capability for priority docks.", False, False)],
+    [("Storm hardening: ", True, False), ("elevated/flood-rated pads, wind-rated structures, sealed/surge-rated "
+        "switchgear, and corrosion protection for the marine/salt-air environment.", False, False)],
+    [("Power quality & redundant conversion: ", True, False), ("frequency conversion (50/60 Hz vessels), harmonic "
+        "mitigation, reactive support, and N+1 shore-power converters so one failed unit does not strand a berth.", False, False)],
 ])
 callout([
     ("Resiliency target: ", True, False),
-    ("berths remain serviceable through a single transmission contingency and can ride through / island during "
-     "regional disturbances — protecting both air-quality compliance and continuity of port operations.", False, False),
+    ("priority berths ride through a single transmission contingency without interruption and can island for a "
+     "defined storm-restoration window — protecting air-quality compliance and continuity of port operations "
+     "through the next Harvey-class event.", False, False),
 ])
 
 # closing
@@ -369,8 +410,9 @@ add_runs(p, [
     ("What our feasibility study will deliver: ", True, False),
     ("(1) surveyed per-berth load profiles and coincident-demand diversity; (2) a costed Phase 1 pilot vs. "
      "Phase 4 138 kV substation comparison; (3) a mapped ERCOT/AEP Texas interconnection pathway with LLIS timing; "
-     "and (4) a recommended BESS/microgrid resiliency package with availability targets — concluding with a "
-     "go/no-go recommendation and a phased implementation roadmap.", False, False),
+     "(4) a recommended BESS/microgrid resiliency package with availability targets; and (5) a storm-resilience "
+     "basis of design benchmarked to Hurricane Harvey, sizing backup/islanding to the expected restoration window "
+     "by berth location — concluding with a go/no-go recommendation and a phased implementation roadmap.", False, False),
 ], size=9.5)
 
 # sources
@@ -381,7 +423,8 @@ pbdr = OxmlElement("w:pBdr")
 top = OxmlElement("w:top"); top.set(qn("w:val"), "single"); top.set(qn("w:sz"), "6"); top.set(qn("w:space"), "4"); top.set(qn("w:color"), "C9D2DD")
 pbdr.append(top); pPr.append(pbdr)
 r = src.add_run("Sources: USACE/Port Corpus Christi CCSC Channel Improvement Project (2019); ERCOT NPRR1234 / "
-                "PGRR115, Large Load Integration; AEP Texas / ETT filings; CPS Energy / Talen; IEC/IEEE 80005-1.")
+                "PGRR115 & Harvey response; AEP Texas / ETT filings; U.S. DOE/EIA Hurricane Harvey event reports; "
+                "CPS Energy / Talen; IEC/IEEE 80005-1.")
 r.font.size = Pt(7.5); r.font.color.rgb = MUTED
 
 out = "/home/user/trustclaw/docs/corpus-shore-power-rfp/corpus-area-power-infrastructure.docx"
