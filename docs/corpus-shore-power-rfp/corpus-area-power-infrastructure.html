@@ -53,15 +53,26 @@
   .header-bar .meta { text-align: right; font-size: 8.6px; color: var(--muted); }
   .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid var(--line); font-size: 7.8px; color: var(--muted); display: flex; justify-content: space-between; }
   .fig { border: 1px solid var(--line); border-radius: 5px; padding: 6px; margin: 4px 0 6px; background: #fff; }
+  .fig svg { display: block; margin: 0 auto; height: 2.35in; width: auto; max-width: 100%; }
   .figcap { font-size: 8.2px; color: var(--muted); margin-top: 3px; }
   .kpis { display: flex; gap: 8px; margin: 6px 0; }
   .kpi { flex: 1; background: var(--bg-soft); border: 1px solid var(--line); border-radius: 5px; padding: 6px 8px; }
   .kpi .n { font-size: 15px; font-weight: 700; color: var(--accent); }
   .kpi .l { font-size: 8px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; }
   @media print {
-    .page { margin: 0; width: auto; min-height: auto; padding: 0.45in 0.5in; page-break-after: always; }
+    .page { margin: 0; width: auto; min-height: auto; padding: 0.38in 0.5in; page-break-after: always; }
     .page + .page { border-top: none; }
-    body { font-size: 9.6px; }
+    body { font-size: 9px; line-height: 1.3; }
+    p { margin: 0 0 4px; }
+    h2 { margin: 7px 0 3px; }
+    h3 { margin: 5px 0 2px; }
+    ul { margin: 1px 0 4px; }
+    li { margin: 0 0 1.5px; }
+    th, td { padding: 3px 6px; }
+    .kpi { padding: 4px 7px; }
+    .callout { padding: 5px 9px; margin: 4px 0; }
+    .fig { margin: 3px 0 4px; }
+    .footer { margin-top: 6px; padding-top: 4px; }
   }
 </style>
 </head>
@@ -89,10 +100,9 @@
   </div>
 
   <p class="lede">This overview summarizes the electrical supply environment serving the Port of Corpus Christi
-  and frames the phased shore-power buildout our feasibility study will assess — from an initial
-  <strong>2-berth pilot</strong> to a full <strong>20-berth</strong> deployment. It outlines the regional grid, the
-  ERCOT interconnection pathway for loads of this magnitude, and the resiliency strategy that the study will
-  develop for a hurricane-exposed coastal industrial port.</p>
+  and frames the phased shore-power buildout our feasibility study will assess — from a <strong>2-berth pilot</strong>
+  to a full <strong>20-berth</strong> deployment — covering the regional grid, the ERCOT interconnection pathway for
+  loads of this magnitude, and the resiliency strategy for a hurricane-exposed coastal industrial port.</p>
 
   <div class="kpis">
     <div class="kpi"><div class="n">~5 MW</div><div class="l">Typical load / berth</div></div>
@@ -135,94 +145,142 @@
     </div>
   </div>
 
-  <h2>2. Approximate Locations — Port of Corpus Christi &amp; Power Assets</h2>
+  <h2>2. Channel Reaches, Berths &amp; Power Assets</h2>
+  <p>The Corpus Christi Ship Channel runs ~29 miles from the Gulf entrance to the Viola Turning Basin, with the
+  La Quinta Channel (~6 miles) branching north (~35 nautical miles of federal channel total). The USACE/Port
+  <strong>Channel Improvement Project (CIP)</strong> is deepening it from <strong>47 to 54&nbsp;ft MLLW</strong> and
+  widening it to <strong>530&nbsp;ft</strong> with barge shelves across the Upper Bay. Deeper water draws larger,
+  fully-laden vessels with higher hotelling demand — strengthening the case for shore power. Berths concentrate in
+  the <strong>Inner Harbor</strong>, with additional energy terminals along <strong>La Quinta/Ingleside</strong>.</p>
   <div class="fig">
     <!-- ===================== EMBEDDED SVG MAP ===================== -->
-    <svg viewBox="0 0 760 300" width="100%" xmlns="http://www.w3.org/2000/svg" role="img"
-         aria-label="Schematic map of the Port of Corpus Christi and surrounding power infrastructure">
+    <svg viewBox="0 0 760 352" xmlns="http://www.w3.org/2000/svg" role="img"
+         aria-label="Schematic map of the Corpus Christi Ship Channel reaches and surrounding power infrastructure">
       <defs>
         <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#cfe6f2"/><stop offset="1" stop-color="#bcdcec"/>
+          <stop offset="0" stop-color="#cfe6f2"/><stop offset="1" stop-color="#b3d6e8"/>
         </linearGradient>
         <marker id="arrow" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
-          <path d="M0,0 L7,3.5 L0,7 Z" fill="#0b5d8f"/>
+          <path d="M0,0 L7,3.5 L0,7 Z" fill="#0f8a6a"/>
         </marker>
       </defs>
 
-      <!-- land -->
-      <rect x="0" y="0" width="760" height="300" fill="#eef2f0"/>
-      <!-- Corpus Christi Bay / Gulf water -->
-      <path d="M0,300 L0,205 Q160,235 360,210 Q540,190 760,225 L760,300 Z" fill="url(#water)"/>
-      <text x="92" y="270" font-family="Segoe UI, Arial" font-size="12" fill="#3b7a99" font-style="italic">Corpus Christi Bay</text>
-      <text x="600" y="252" font-family="Segoe UI, Arial" font-size="11" fill="#3b7a99" font-style="italic">→ Gulf of Mexico</text>
+      <!-- land base -->
+      <rect x="0" y="0" width="760" height="352" fill="#eef2f0"/>
 
-      <!-- Ship Channel (the port spine) -->
-      <path d="M30,150 Q220,140 430,150 Q560,156 720,205" fill="none" stroke="#8bbdd6" stroke-width="13" stroke-linecap="round" opacity="0.85"/>
-      <path d="M30,150 Q220,140 430,150 Q560,156 720,205" fill="none" stroke="#5d9ec0" stroke-width="2" stroke-dasharray="5 5"/>
-      <text x="150" y="132" font-family="Segoe UI, Arial" font-size="10" fill="#27617f">La Quinta / Inner Harbor Ship Channel</text>
+      <!-- Gulf of Mexico (east / right) -->
+      <rect x="712" y="0" width="48" height="352" fill="url(#water)"/>
+      <text x="736" y="200" font-family="Segoe UI, Arial" font-size="11" fill="#3b7a99" font-style="italic"
+            transform="rotate(90 736 200)">Gulf of Mexico</text>
 
+      <!-- Corpus Christi Bay -->
+      <ellipse cx="405" cy="240" rx="290" ry="84" fill="url(#water)"/>
+      <text x="430" y="285" font-family="Segoe UI, Arial" font-size="12" fill="#2f6f8c" font-style="italic">Corpus Christi Bay</text>
+      <!-- Nueces Bay (NW) -->
+      <ellipse cx="150" cy="120" rx="74" ry="36" fill="url(#water)"/>
+      <text x="112" y="123" font-family="Segoe UI, Arial" font-size="9" fill="#2f6f8c" font-style="italic">Nueces Bay</text>
+      <!-- Redfish Bay (NE, near entrance) -->
+      <ellipse cx="635" cy="120" rx="55" ry="38" fill="url(#water)"/>
+      <text x="606" y="123" font-family="Segoe UI, Arial" font-size="9" fill="#2f6f8c" font-style="italic">Redfish Bay</text>
+
+      <!-- ===== Ship Channel spine (Gulf entrance -> Inner Harbor) ===== -->
+      <!-- main channel -->
+      <path d="M735,168 L690,168 Q620,172 470,214 Q330,242 250,212 Q220,200 200,182 L60,160"
+            fill="none" stroke="#7fb6d4" stroke-width="11" stroke-linecap="round" opacity="0.9"/>
+      <path d="M735,168 L690,168 Q620,172 470,214 Q330,242 250,212 Q220,200 200,182 L60,160"
+            fill="none" stroke="#3f86ad" stroke-width="1.6" stroke-dasharray="5 4"/>
+      <!-- La Quinta Channel branch (north) -->
+      <path d="M455,217 Q452,150 440,104" fill="none" stroke="#7fb6d4" stroke-width="9" stroke-linecap="round" opacity="0.9"/>
+      <path d="M455,217 Q452,150 440,104" fill="none" stroke="#3f86ad" stroke-width="1.4" stroke-dasharray="5 4"/>
+      <!-- Viola Turning Basin (inland terminus) -->
+      <circle cx="60" cy="160" r="9" fill="#7fb6d4" stroke="#3f86ad" stroke-width="1.2"/>
+
+      <!-- channel reach labels (CIP: 47 -> 54 ft MLLW, widened to 530 ft) -->
+      <g font-family="Segoe UI, Arial" font-size="8.2" fill="#27617f" font-style="italic">
+        <text x="636" y="150">Entrance / Jetty 3.9 mi</text>
+        <text x="556" y="236">Lower Bay Reach 8.6 mi</text>
+        <text x="300" y="250">Upper Bay Reach 9.6 mi</text>
+        <text x="44" y="196">Inner Harbor 7.3 mi</text>
+        <text x="466" y="158">La Quinta Ch. 5.9 mi</text>
+      </g>
+
+      <!-- place labels -->
+      <g font-family="Segoe UI, Arial" font-size="8.6" font-style="italic" fill="#6b4a2a">
+        <text x="60" y="218">Corpus Christi</text>
+        <text x="356" y="66">Ingleside / La Quinta</text>
+        <text x="636" y="92">Port Aransas /</text>
+        <text x="636" y="102">Harbor Island</text>
+      </g>
+
+      <!-- ===== Power infrastructure ===== -->
       <!-- 345 kV backbone -->
-      <polyline points="60,40 230,55 470,46 690,60" fill="none" stroke="#b3261e" stroke-width="3"/>
-      <text x="60" y="32" font-family="Segoe UI, Arial" font-size="9.5" fill="#b3261e" font-weight="bold">345 kV BACKBONE</text>
-
-      <!-- 138 kV ring -->
-      <polyline points="120,95 300,88 360,150 300,150 230,120 150,150 120,95"
-                fill="none" stroke="#0b5d8f" stroke-width="2.2" stroke-dasharray="2 0"/>
-      <polyline points="360,150 470,110 560,150 470,150 360,150"
+      <polyline points="40,42 220,52 470,44 700,56" fill="none" stroke="#b3261e" stroke-width="3"/>
+      <text x="40" y="34" font-family="Segoe UI, Arial" font-size="9.5" fill="#b3261e" font-weight="bold">345 kV BACKBONE</text>
+      <!-- 138 kV ring around the Inner Harbor / city -->
+      <polyline points="70,150 120,96 250,92 270,150 200,178 110,176 70,150"
                 fill="none" stroke="#0b5d8f" stroke-width="2.2"/>
-      <text x="380" y="103" font-family="Segoe UI, Arial" font-size="9.5" fill="#0b5d8f" font-weight="bold">138 kV ring</text>
-
+      <text x="150" y="118" font-family="Segoe UI, Arial" font-size="9" fill="#0b5d8f" font-weight="bold">138 kV ring</text>
+      <!-- 138 kV spur to Ingleside / La Quinta berths -->
+      <polyline points="250,92 360,80 440,92" fill="none" stroke="#0b5d8f" stroke-width="2"/>
       <!-- 345/138 transformation taps -->
-      <line x1="230" y1="55" x2="230" y2="120" stroke="#b3261e" stroke-width="1.6"/>
-      <line x1="470" y1="46" x2="470" y2="110" stroke="#b3261e" stroke-width="1.6"/>
+      <line x1="220" y1="52" x2="232" y2="92" stroke="#b3261e" stroke-width="1.5"/>
+      <line x1="470" y1="44" x2="445" y2="80" stroke="#b3261e" stroke-width="1.5"/>
 
       <!-- Substations (blue squares) -->
-      <g font-family="Segoe UI, Arial" font-size="8.6" fill="#1a2230">
-        <rect x="144" y="144" width="11" height="11" fill="#0b5d8f"/><text x="120" y="172">Holly Rd</text>
-        <rect x="294" y="144" width="11" height="11" fill="#0b5d8f"/><text x="276" y="172">McKenzie</text>
-        <rect x="464" y="104" width="11" height="11" fill="#0b5d8f"/><text x="448" y="100">Lon Hill</text>
-        <rect x="554" y="144" width="11" height="11" fill="#0b5d8f"/><text x="540" y="172">Warburton</text>
+      <g font-family="Segoe UI, Arial" font-size="8.4" fill="#1a2230">
+        <rect x="183" y="153" width="10" height="10" fill="#0b5d8f"/><text x="196" y="162">Holly Rd</text>
+        <rect x="248" y="145" width="10" height="10" fill="#0b5d8f"/><text x="262" y="154">McKenzie</text>
+        <rect x="245" y="86" width="10" height="10" fill="#0b5d8f"/><text x="206" y="80">Lon Hill</text>
+        <rect x="435" y="86" width="10" height="10" fill="#0b5d8f"/><text x="448" y="82">Ingleside</text>
       </g>
 
       <!-- Generation (orange diamonds) -->
-      <g font-family="Segoe UI, Arial" font-size="8.6" fill="#1a2230">
-        <path d="M300,84 l6,6 l-6,6 l-6,-6 Z" fill="#e07b1a"/><text x="312" y="82">Nueces Bay 635 MW</text>
-        <path d="M610,200 l6,6 l-6,6 l-6,-6 Z" fill="#e07b1a"/><text x="500" y="208" text-anchor="end" font-size="8.6"></text>
-        <text x="624" y="212">Barney Davis 897 MW</text>
-      </g>
-
-      <!-- Proposed shore power berths (green) along channel -->
-      <g>
-        <circle cx="200" cy="146" r="6" fill="#0f8a6a" stroke="#fff" stroke-width="1.3"/>
-        <circle cx="250" cy="145" r="6" fill="#0f8a6a" stroke="#fff" stroke-width="1.3"/>
-        <circle cx="340" cy="148" r="4.5" fill="#7fc9b0" stroke="#fff" stroke-width="1.1"/>
-        <circle cx="390" cy="150" r="4.5" fill="#7fc9b0" stroke="#fff" stroke-width="1.1"/>
-        <circle cx="440" cy="151" r="4.5" fill="#7fc9b0" stroke="#fff" stroke-width="1.1"/>
-        <circle cx="500" cy="153" r="4.5" fill="#cfe9df" stroke="#0f8a6a" stroke-width="1.1"/>
-        <circle cx="560" cy="160" r="4.5" fill="#cfe9df" stroke="#0f8a6a" stroke-width="1.1"/>
-        <circle cx="620" cy="172" r="4.5" fill="#cfe9df" stroke="#0f8a6a" stroke-width="1.1"/>
-      </g>
-      <text x="180" y="200" font-family="Segoe UI, Arial" font-size="9" fill="#0f8a6a" font-weight="bold">Shore-power berths (Phase 1 → full build along channel)</text>
-
-      <!-- feeder from substation to berths -->
-      <line x1="200" y1="146" x2="155" y2="150" stroke="#0f8a6a" stroke-width="1.5" marker-end="url(#arrow)"/>
-      <line x1="250" y1="145" x2="300" y2="150" stroke="#0f8a6a" stroke-width="1.5" marker-end="url(#arrow)"/>
-
-      <!-- Legend -->
       <g font-family="Segoe UI, Arial" font-size="8.4" fill="#1a2230">
-        <rect x="20" y="222" width="250" height="66" fill="#ffffff" stroke="#c9d2dd" rx="4"/>
-        <text x="30" y="236" font-weight="bold" fill="#0b5d8f">LEGEND</text>
-        <line x1="30" y1="248" x2="50" y2="248" stroke="#b3261e" stroke-width="3"/><text x="56" y="251">345 kV line</text>
-        <line x1="150" y1="248" x2="170" y2="248" stroke="#0b5d8f" stroke-width="2.2"/><text x="176" y="251">138 kV line</text>
-        <rect x="30" y="259" width="10" height="10" fill="#0b5d8f"/><text x="46" y="268">Substation</text>
-        <path d="M155,258 l5,5 l-5,5 l-5,-5 Z" fill="#e07b1a"/><text x="166" y="268">Generation</text>
-        <circle cx="35" cy="281" r="5" fill="#0f8a6a"/><text x="46" y="284">Phase 1 berth</text>
-        <circle cx="150" cy="281" r="5" fill="#cfe9df" stroke="#0f8a6a"/><text x="161" y="284">Future berth</text>
+        <path d="M168,128 l6,6 l-6,6 l-6,-6 Z" fill="#e07b1a"/><text x="184" y="140">Nueces Bay 635 MW</text>
+        <path d="M452,306 l6,6 l-6,6 l-6,-6 Z" fill="#e07b1a"/><text x="350" y="316">Barney Davis 897 MW</text>
+      </g>
+
+      <!-- Shore-power berths: Phase 1 (solid), expansion (mid), future (light) -->
+      <g>
+        <!-- Phase 1 pilot (Inner Harbor) -->
+        <circle cx="108" cy="158" r="6" fill="#0f8a6a" stroke="#fff" stroke-width="1.3"/>
+        <circle cx="135" cy="164" r="6" fill="#0f8a6a" stroke="#fff" stroke-width="1.3"/>
+        <!-- expansion along Inner Harbor -->
+        <circle cx="84" cy="152" r="4.6" fill="#7fc9b0" stroke="#fff" stroke-width="1.1"/>
+        <circle cx="160" cy="170" r="4.6" fill="#7fc9b0" stroke="#fff" stroke-width="1.1"/>
+        <circle cx="185" cy="176" r="4.6" fill="#7fc9b0" stroke="#fff" stroke-width="1.1"/>
+        <!-- future berths: Ingleside / La Quinta -->
+        <circle cx="428" cy="110" r="4.6" fill="#cfe9df" stroke="#0f8a6a" stroke-width="1.1"/>
+        <circle cx="446" cy="122" r="4.6" fill="#cfe9df" stroke="#0f8a6a" stroke-width="1.1"/>
+      </g>
+
+      <!-- feeder from Holly Rd substation to Phase-1 berths -->
+      <line x1="184" y1="158" x2="135" y2="164" stroke="#0f8a6a" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <line x1="186" y1="160" x2="108" y2="158" stroke="#0f8a6a" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+      <!-- north arrow -->
+      <g transform="translate(690,300)">
+        <path d="M0,-14 L5,6 L0,1 L-5,6 Z" fill="#1a2230"/>
+        <text x="-4" y="20" font-family="Segoe UI, Arial" font-size="9" fill="#1a2230">N</text>
+      </g>
+
+      <!-- Legend strip -->
+      <g font-family="Segoe UI, Arial" font-size="8.3" fill="#1a2230">
+        <rect x="16" y="318" width="640" height="26" fill="#ffffff" stroke="#c9d2dd" rx="4"/>
+        <text x="26" y="334" font-weight="bold" fill="#0b5d8f">LEGEND</text>
+        <line x1="78" y1="331" x2="98" y2="331" stroke="#b3261e" stroke-width="3"/><text x="103" y="334">345 kV</text>
+        <line x1="150" y1="331" x2="170" y2="331" stroke="#0b5d8f" stroke-width="2.2"/><text x="175" y="334">138 kV</text>
+        <rect x="222" y="326" width="10" height="10" fill="#0b5d8f"/><text x="237" y="334">Substation</text>
+        <path d="M305,326 l5,5 l-5,5 l-5,-5 Z" fill="#e07b1a"/><text x="316" y="334">Generation</text>
+        <circle cx="392" cy="331" r="5" fill="#0f8a6a"/><text x="402" y="334">Phase 1 berth</text>
+        <circle cx="486" cy="331" r="5" fill="#7fc9b0"/><text x="496" y="334">Expansion</text>
+        <circle cx="566" cy="331" r="5" fill="#cfe9df" stroke="#0f8a6a"/><text x="576" y="334">Future berth</text>
       </g>
     </svg>
-    <div class="figcap">Figure 1 — Schematic (not to scale). Positions are approximate and illustrate relative
-    relationships between the ship channel berths, the AEP Texas 138 kV ring, the 345 kV backbone, key substations,
-    and in-zone generation. A surveyed GIS alignment is to be developed during preliminary engineering.</div>
+    <div class="figcap">Figure 1 — Schematic (not to scale), oriented to the USACE Corpus Christi Ship Channel
+    Improvement Project (Aug 2019). Reaches Gulf-to-inland: Entrance/Jetty (3.9 mi), Lower Bay (8.6 mi), Upper Bay
+    (9.6 mi), Inner Harbor (7.3 mi), with the La Quinta Channel (5.9 mi) branching north. Power assets and berth
+    locations are approximate; a surveyed GIS alignment is to be developed during the feasibility study.</div>
   </div>
 
   <div class="footer">
@@ -253,20 +311,20 @@
     </thead>
     <tbody>
       <tr><td><span class="tag">Phase 1</span> Pilot</td><td>Yr 1–2</td><td>2</td><td>~8–12 MW</td>
-          <td>Distribution tap from existing AEP Texas circuit; standard service request</td></tr>
+          <td>Distribution tap off existing AEP Texas circuit</td></tr>
       <tr><td><span class="tag">Phase 2</span> Expand</td><td>Yr 2–4</td><td>6</td><td>~25–30 MW</td>
-          <td>Crosses 25 MW modeling threshold; new distribution substation / express feeders</td></tr>
+          <td>New distribution substation / express feeders (crosses 25 MW)</td></tr>
       <tr><td><span class="tag">Phase 3</span> Scale</td><td>Yr 4–7</td><td>12</td><td>~55–70 MW</td>
-          <td>Approaches Large-Load threshold; begin dedicated 138 kV substation</td></tr>
+          <td>Begin dedicated 138 kV substation (nears 75 MW)</td></tr>
       <tr><td><span class="tag">Phase 4</span> Full</td><td>Yr 7–10</td><td>20</td><td>~90–120 MW</td>
-          <td>Transmission-class delivery via dedicated 138 kV port substation; full LLIS</td></tr>
+          <td>Dedicated 138 kV port substation; full LLIS</td></tr>
     </tbody>
   </table>
-  <p class="sub">The feasibility study will confirm this phasing — aligning capital with demonstrated vessel
-  uptake, proving operations at the distribution-level pilot before transmission investment, and sequencing the
-  ERCOT studies so the dedicated substation is energized ahead of the berths that depend on it. Berth counts, loads,
-  and horizons shown are the planning basis our study will refine against surveyed vessel data and AEP Texas
-  hosting-capacity input.</p>
+  <p class="sub">Geographically, the pilot targets <strong>Inner Harbor</strong> berths closest to existing AEP Texas
+  feeders, expanding along the Inner Harbor and then to the <strong>La Quinta/Ingleside</strong> energy terminals as a
+  dedicated 138 kV substation comes online. This sequences the ERCOT studies so the substation is energized ahead of
+  the berths that depend on it. Berth counts, loads, and horizons are the planning basis the study will refine
+  against surveyed vessel data and AEP Texas hosting-capacity input.</p>
 
   <h2>4. ERCOT Interconnection for Loads of This Size</h2>
   <div class="cols">
@@ -340,15 +398,14 @@
     </div>
   </div>
 
-  <p class="sub" style="margin-top:8px;"><strong>What our feasibility study will deliver:</strong> (1) surveyed
-  per-berth vessel load profiles and coincident-demand diversity; (2) a costed comparison of the Phase 1
-  distribution pilot versus the Phase 4 138 kV substation, with order-of-magnitude capital and schedule;
-  (3) a mapped ERCOT/AEP Texas interconnection pathway including LLIS timing and milestones; and (4) a recommended
-  BESS/microgrid resiliency package with quantified availability targets — concluding with a go/no-go
-  recommendation and a phased implementation roadmap.</p>
+  <p class="sub" style="margin-top:6px;"><strong>What our feasibility study will deliver:</strong> (1) surveyed
+  per-berth load profiles and coincident-demand diversity; (2) a costed Phase 1 pilot vs. Phase 4 138 kV substation
+  comparison; (3) a mapped ERCOT/AEP Texas interconnection pathway with LLIS timing; and (4) a recommended
+  BESS/microgrid resiliency package with availability targets — concluding with a go/no-go recommendation and a
+  phased implementation roadmap.</p>
 
   <div class="footer">
-    <span>Sources: ERCOT (NPRR1234 / PGRR115, Large Load Integration); AEP Texas / ETT transmission filings; CPS Energy / Talen Energy generation acquisition; IEC/IEEE 80005-1 HVSC.</span>
+    <span>Sources: USACE/Port Corpus Christi CCSC Channel Improvement Project (2019); ERCOT NPRR1234 / PGRR115; AEP Texas / ETT filings; CPS Energy / Talen; IEC/IEEE 80005-1.</span>
     <span>Page 2 of 2</span>
   </div>
 </section>

@@ -5,8 +5,9 @@ prepared in support of **our proposal to perform the shore-power (cold ironing) 
 for the Port of Corpus Christi. It frames our understanding of the problem and the scope the study
 will evaluate — it is not a final engineering design, and the figures shown are the planning-level
 questions the study will resolve. It includes an inline **SVG location map** (no external assets)
-showing approximate relationships between the ship-channel berths, the AEP Texas 138 kV ring, the
-345 kV backbone, key substations, and in-zone generation.
+oriented to the USACE Corpus Christi Ship Channel Improvement Project — showing the labeled channel
+reaches (Entrance/Jetty, Lower Bay, Upper Bay, Inner Harbor, and the La Quinta branch), berth
+locations, the AEP Texas 138 kV ring, the 345 kV backbone, key substations, and in-zone generation.
 
 ## How to use
 
@@ -34,6 +35,8 @@ showing approximate relationships between the ship-channel berths, the AEP Texas
 
 ## Sources
 
+- USACE Galveston District / Port Corpus Christi — *Corpus Christi Ship Channel Improvement Project*, Summer Stakeholder Partnering Forum (Aug 14, 2019) — channel reaches, dimensions, and CIP contracts. (Provided as the `09_Stakeholder_Meeting_08142019` PDF.)
+- [Port of Corpus Christi — Completes Milestone Ship Channel Improvement Project](https://portofcc.com/port-of-corpus-christi-completes-milestone-ship-channel-improvement-project-reinforcing-u-s-as-leader-in-energy-exports/)
 - [ERCOT — Large Load Integration](https://www.ercot.com/services/rq/large-load-integration)
 - [ERCOT — Large Load Interconnection Process Q&A (PDF)](https://www.ercot.com/files/docs/2025/12/24/Large-Load-Interconnection-Process-Q-A.pdf)
 - [ERCOT — NPRR1234 issue page](https://www.ercot.com/mktrules/issues/NPRR1234)
