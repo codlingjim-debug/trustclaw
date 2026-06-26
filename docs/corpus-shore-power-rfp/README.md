@@ -1,6 +1,6 @@
 # Corpus Christi Area Power Infrastructure — Shore Power RFP Overview
 
-`corpus-area-power-infrastructure.html` is a self-contained, print-ready **3-page** overview
+`corpus-area-power-infrastructure.html` is a self-contained, print-ready **4-page** overview
 prepared in support of **our proposal to perform the shore-power (cold ironing) feasibility study**
 for the Port of Corpus Christi. It frames our understanding of the problem and the scope the study
 will evaluate — it is not a final engineering design, and the figures shown are the planning-level
@@ -11,14 +11,20 @@ locations, the AEP Texas 138 kV ring, the 345 kV backbone, key substations, and 
 
 ## Files
 
-- `corpus-area-power-infrastructure.html` — editable source; print / "Save as PDF" for a 3-page Letter document.
+- `corpus-area-power-infrastructure.html` — editable source; print / "Save as PDF" for a 4-page Letter document.
 - `corpus-area-power-infrastructure.docx` — Word version (same content; the map is embedded as a high-resolution
   image since Word does not render inline SVG reliably across versions).
 
+> **Pending asset — Figure 2 (storm-surge map):** Section 5 references an NWS storm-surge inundation map
+> (100-yr annual exceedance probability) for the Corpus Christi inner harbor. The graphic is currently a
+> placeholder. To embed it, drop the image at `assets/storm-surge-corpus.png` (HTML) / `storm-surge-corpus.png`
+> next to `generate-docx.py` (Word) and re-render. Inline-pasted images are not accessible to the build — attach
+> the file so it lands on disk.
+
 ## How to use
 
-- **HTML:** open in any browser, then Print / "Save as PDF" — print CSS paginates it cleanly to 3 pages (Letter).
-- **Word:** open the `.docx` directly in Microsoft Word or Google Docs. Page breaks separate the three pages;
+- **HTML:** open in any browser, then Print / "Save as PDF" — print CSS paginates it cleanly to 4 pages (Letter).
+- **Word:** open the `.docx` directly in Microsoft Word or Google Docs. Page breaks separate the four pages;
   exact pagination can vary slightly by Word version/printer, so confirm before final distribution.
 
 ## Contents
@@ -27,7 +33,7 @@ locations, the AEP Texas 138 kV ring, the 345 kV backbone, key substations, and 
 2. Channel reaches, berths & power assets — embedded SVG map (USACE CIP geometry)
 3. Phased buildout — 2 berths → 20 berths (~10 MW → ~100 MW)
 4. ERCOT interconnection for loads of this size (NPRR1234 / PGRR115, LLIS)
-5. Transmission reliability & the Hurricane Harvey benchmark (345/138 kV outage history)
+5. Transmission reliability & the Hurricane Harvey benchmark; coastal storm-surge exposure (NWS SLOSH / USACE CHS)
 6. Resiliency measures & backup power (N-1, BESS, standby gen, microgrid/islanding, storm hardening)
 
 ## Key planning figures
@@ -59,6 +65,8 @@ locations, the AEP Texas 138 kV ring, the 345 kV backbone, key substations, and 
 - [Utility Dive — AEP CEO: Harvey 'devastated' transmission, distribution system in south Texas](https://www.utilitydive.com/news/aep-ceo-harvey-devastated-transmission-distribution-system-in-south-tex/504043/)
 - [T&D World — AEP Texas Overcomes Hurricane Destruction](https://www.tdworld.com/electric-utility-operations/article/20970767/aep-texas-overcomes-hurricane-destruction)
 - [ERCOT — Responds to Hurricane Harvey](https://www.ercot.com/help/harvey)
+- [NWS — Storm surge / SLOSH (Maximum of Maximums) inundation mapping](https://www.nhc.noaa.gov/nationalsurge/)
+- [USACE — Coastal Hazards System (CHS)](https://chs.erdc.dren.mil/)
 
 > Figures are planning-level approximations for RFP framing. Substation positions on the map are
 > schematic and not to scale; a surveyed GIS alignment should be developed during preliminary engineering.

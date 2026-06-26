@@ -54,6 +54,8 @@
   .footer { margin-top: 10px; padding-top: 5px; border-top: 1px solid var(--line); font-size: 7.8px; color: var(--muted); display: flex; justify-content: space-between; }
   .fig { border: 1px solid var(--line); border-radius: 5px; padding: 6px; margin: 4px 0 6px; background: #fff; }
   .fig svg { display: block; margin: 0 auto; height: 2.35in; width: auto; max-width: 100%; }
+  .fig img.surge { display: block; margin: 0 auto; max-width: 100%; max-height: 2.2in; border: 1px solid var(--line); border-radius: 4px; }
+  .surge-placeholder { display: flex; align-items: center; justify-content: center; height: 1.9in; border: 2px dashed var(--line); border-radius: 5px; background: var(--bg-soft); color: var(--muted); font-size: 9px; text-align: center; padding: 8px; }
   .figcap { font-size: 8.2px; color: var(--muted); margin-top: 3px; }
   .kpis { display: flex; gap: 8px; margin: 6px 0; }
   .kpi { flex: 1; background: var(--bg-soft); border: 1px solid var(--line); border-radius: 5px; padding: 6px 8px; }
@@ -94,9 +96,12 @@
 
   <div class="callout" style="margin-top:0;">
     <strong>Purpose of this document.</strong> We are responding to the RFP by proposing to perform the
-    <strong>shore-power feasibility study</strong>. The material below frames our understanding of the problem and
-    the scope our study will rigorously evaluate — it is <em>not</em> a final engineering design. Figures are
-    planning-level and represent the questions the feasibility study will resolve, not committed values.
+    <strong>shore-power feasibility study</strong>. As a <strong>local firm with more than 30 design professionals
+    based in Corpus Christi</strong> — including in-house coastal, electrical, and infrastructure expertise — we bring
+    on-the-ground knowledge of the port, the AEP Texas grid, and the region's coastal hazards. The material below
+    frames our understanding of the problem and the scope our study will rigorously evaluate — it is <em>not</em> a
+    final engineering design. Figures are planning-level and represent the questions the feasibility study will
+    resolve, not committed values.
   </div>
 
   <p class="lede">This overview summarizes the electrical supply environment serving the Port of Corpus Christi
@@ -280,15 +285,15 @@
         <circle cx="566" cy="331" r="5" fill="#cfe9df" stroke="#0f8a6a"/><text x="576" y="334">Future berth</text>
       </g>
     </svg>
-    <div class="figcap">Figure 1 — Schematic (not to scale), oriented to the USACE Corpus Christi Ship Channel
-    Improvement Project (Aug 2019). Reaches Gulf-to-inland: Entrance/Jetty (3.9 mi), Lower Bay (8.6 mi), Upper Bay
-    (9.6 mi), Inner Harbor (7.3 mi), with the La Quinta Channel (5.9 mi) branching north. Power assets and berth
-    locations are approximate; a surveyed GIS alignment is to be developed during the feasibility study.</div>
+    <div class="figcap">Figure 1 — Geographic Network Diagram (not to scale). Channel reaches Gulf-to-inland:
+    Entrance/Jetty (3.9 mi), Lower Bay (8.6 mi), Upper Bay (9.6 mi), Inner Harbor (7.3 mi), with the La Quinta
+    Channel (5.9 mi) branching north. Power assets and berth locations are approximate; a surveyed GIS alignment is
+    to be developed during the feasibility study.</div>
   </div>
 
   <div class="footer">
     <span>Corpus Christi Area Power Infrastructure — Shore Power RFP Overview</span>
-    <span>Page 1 of 3</span>
+    <span>Page 1 of 4</span>
   </div>
 </section>
 
@@ -368,7 +373,7 @@
 
   <div class="footer">
     <span>Corpus Christi Area Power Infrastructure — Shore Power RFP Overview</span>
-    <span>Page 2 of 3</span>
+    <span>Page 2 of 4</span>
   </div>
 </section>
 
@@ -376,7 +381,7 @@
 <section class="page">
   <div class="header-bar">
     <div>
-      <h1 style="font-size:14px;">Transmission Reliability, Resiliency &amp; Backup Power</h1>
+      <h1 style="font-size:14px;">Transmission Reliability &amp; Coastal Storm Surge</h1>
       <div class="sub">Shore Power (Cold Ironing) — Scope of our Feasibility Study proposal</div>
     </div>
     <div class="meta">ERCOT South / Coastal Zone<br/>AEP Texas service territory</div>
@@ -401,14 +406,47 @@
       communities nearest the entrance and La&nbsp;Quinta/Ingleside were <strong>not fully restored for ~2 weeks</strong>.</li>
     </ul>
   </div>
+  <h3>Coastal storm-surge exposure</h3>
+  <p>Hurricane Harvey was a significant surge event, but by no means the worst that can be expected. SLOSH modeling
+  by the National Weather Service (NWS) shows the &ldquo;maximum of maximums&rdquo; anticipated from storm surge;
+  while it does not capture compound (rainfall/riverine) flooding, it clearly demonstrates the footprint where surge
+  waters would propagate through the inner-harbor region. The NWS storm-surge inundation map for the 100-year annual
+  exceedance probability (Figure&nbsp;2) illustrates this footprint across the Corpus Christi inner harbor. We
+  recommend using the U.S. Army Corps of Engineers (USACE) <strong>Coastal Hazard System (CHS)</strong> to conduct a
+  desktop analysis of <strong>annual exceedance probabilities (AEPs)</strong> to determine the required protective
+  elevations for power infrastructure — substations, switchgear, and shore-power converters.</p>
+  <div class="fig">
+    <div class="surge-placeholder">[ NWS storm-surge inundation map (100-yr annual exceedance probability),
+      Corpus Christi inner harbor — image to be embedded ]</div>
+    <div class="figcap">Figure 2 — NWS storm-surge inundation map, 100-year annual exceedance probability, Corpus
+    Christi inner harbor. Surge-depth bands (4–6 ft up to 18–25 ft) define the inundation footprint that governs
+    siting and protective elevation of port power infrastructure. Source: National Weather Service.</div>
+  </div>
   <div class="callout" style="border-left-color:#0f8a6a;">
     <strong>Implication for backup power:</strong> shore power <em>cannot</em> assume grid availability during a
     Harvey-class event. For priority berths, backup/islanding should be sized to a <strong>multi-day to ~2-week
     restoration window</strong> — favoring on-site/standby generation paired with BESS rather than batteries alone —
     and coastal substations and switchgear must be <strong>hardened against storm surge and saltwater intrusion</strong>
-    (elevated pads, sealed/submersible-rated breakers) per the Port Aransas failure mode. Because the entrance and
-    La&nbsp;Quinta/Ingleside berths sit nearer the worst-hit zone than the Inner Harbor, backup duration should scale by
-    berth location.
+    (elevated pads, sealed/submersible-rated breakers) per the Port Aransas failure mode. Equipment platform
+    elevations should be set from the USACE CHS / AEP analysis above. Because the entrance and
+    La&nbsp;Quinta/Ingleside berths sit nearer the worst-hit zone than the Inner Harbor, backup duration and
+    protective elevation should scale by berth location.
+  </div>
+
+  <div class="footer">
+    <span>Corpus Christi Area Power Infrastructure — Shore Power RFP Overview</span>
+    <span>Page 3 of 4</span>
+  </div>
+</section>
+
+<!-- ============================ PAGE 4 ============================ -->
+<section class="page">
+  <div class="header-bar">
+    <div>
+      <h1 style="font-size:14px;">Resiliency Measures &amp; Backup Power</h1>
+      <div class="sub">Shore Power (Cold Ironing) — Scope of our Feasibility Study proposal</div>
+    </div>
+    <div class="meta">ERCOT South / Coastal Zone<br/>AEP Texas service territory</div>
   </div>
 
   <h2>6. Resiliency Measures &amp; Backup Power</h2>
@@ -453,8 +491,8 @@
   concluding with a go/no-go recommendation and a phased implementation roadmap.</p>
 
   <div class="footer">
-    <span>Sources: USACE/Port Corpus Christi CCSC CIP (2019); ERCOT NPRR1234 / PGRR115 &amp; Harvey response; AEP Texas / ETT filings; U.S. DOE/EIA Harvey event reports; CPS Energy / Talen; IEC/IEEE 80005-1.</span>
-    <span>Page 3 of 3</span>
+    <span>Sources: USACE CCSC CIP (2019) &amp; Coastal Hazard System; NWS SLOSH storm-surge inundation mapping; ERCOT NPRR1234 / PGRR115 &amp; Harvey response; AEP Texas / ETT filings; U.S. DOE/EIA Harvey event reports; CPS Energy / Talen; IEC/IEEE 80005-1.</span>
+    <span>Page 4 of 4</span>
   </div>
 </section>
 

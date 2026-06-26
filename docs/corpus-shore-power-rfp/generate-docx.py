@@ -130,8 +130,11 @@ callout([
     ("Purpose of this document. ", True, False),
     ("We are responding to the RFP by proposing to perform the ", False, False),
     ("shore-power feasibility study", True, False),
-    (". The material below frames our understanding of the problem and the scope our study will rigorously "
-     "evaluate — it is ", False, False),
+    (". As a ", False, False),
+    ("local firm with more than 30 design professionals based in Corpus Christi", True, False),
+    (" — including in-house coastal, electrical, and infrastructure expertise — we bring on-the-ground knowledge of "
+     "the port, the AEP Texas grid, and the region's coastal hazards. The material below frames our understanding "
+     "of the problem and the scope our study will rigorously evaluate — it is ", False, False),
     ("not", False, True),
     (" a final engineering design. Figures are planning-level and represent the questions the feasibility "
      "study will resolve, not committed values.", False, False),
@@ -232,10 +235,10 @@ pic.add_run().add_picture("map_for_docx.png", width=Inches(7.0))
 cap = doc.add_paragraph()
 cap.paragraph_format.space_after = Pt(4)
 r = cap.add_run(
-    "Figure 1 — Schematic (not to scale), oriented to the USACE Corpus Christi Ship Channel Improvement Project "
-    "(Aug 2019). Reaches Gulf-to-inland: Entrance/Jetty (3.9 mi), Lower Bay (8.6 mi), Upper Bay (9.6 mi), Inner "
-    "Harbor (7.3 mi), with the La Quinta Channel (5.9 mi) branching north. Power assets and berth locations are "
-    "approximate; a surveyed GIS alignment is to be developed during the feasibility study.")
+    "Figure 1 — Geographic Network Diagram (not to scale). Channel reaches Gulf-to-inland: Entrance/Jetty (3.9 mi), "
+    "Lower Bay (8.6 mi), Upper Bay (9.6 mi), Inner Harbor (7.3 mi), with the La Quinta Channel (5.9 mi) branching "
+    "north. Power assets and berth locations are approximate; a surveyed GIS alignment is to be developed during "
+    "the feasibility study.")
 r.font.size = Pt(8); r.font.color.rgb = MUTED; r.italic = True
 
 # ---------- Page break to page 2 ----------
@@ -367,6 +370,49 @@ bullets([
      "coastal communities nearest the entrance and La Quinta/Ingleside were ", False, False),
      ("not fully restored for ~2 weeks", True, False), (".", False, False)],
 ])
+# coastal storm-surge subsection
+sub = doc.add_paragraph()
+sub.paragraph_format.space_before = Pt(4)
+sub.paragraph_format.space_after = Pt(1)
+add_runs(sub, [("Coastal storm-surge exposure", True, False)], size=10, color=INK)
+p = doc.add_paragraph()
+add_runs(p, [
+    ("Hurricane Harvey was a significant surge event, but by no means the worst that can be expected. SLOSH "
+     "modeling by the National Weather Service (NWS) shows the “maximum of maximums” anticipated from storm surge; "
+     "while it does not capture compound (rainfall/riverine) flooding, it clearly demonstrates the footprint where "
+     "surge waters would propagate through the inner-harbor region. The NWS storm-surge inundation map for the "
+     "100-year annual exceedance probability (Figure 2) illustrates this footprint across the Corpus Christi inner "
+     "harbor. We recommend using the U.S. Army Corps of Engineers (USACE) ", False, False),
+    ("Coastal Hazard System (CHS)", True, False),
+    (" to conduct a desktop analysis of ", False, False),
+    ("annual exceedance probabilities (AEPs)", True, False),
+    (" to determine the required protective elevations for power infrastructure — substations, switchgear, and "
+     "shore-power converters.", False, False),
+])
+
+# Figure 2 — surge map (embedded if present, else placeholder box)
+import os
+surge_img = "storm-surge-corpus.png"
+fig2 = doc.add_paragraph()
+fig2.alignment = WD_ALIGN_PARAGRAPH.CENTER
+fig2.paragraph_format.space_after = Pt(2)
+if os.path.exists(surge_img):
+    fig2.add_run().add_picture(surge_img, width=Inches(6.4))
+else:
+    box = fig2.add_run("[ NWS storm-surge inundation map (100-yr annual exceedance probability), "
+                       "Corpus Christi inner harbor — image to be embedded ]")
+    box.italic = True
+    box.font.size = Pt(9)
+    box.font.color.rgb = MUTED
+    shade(fig2, SHADE)
+cap2 = doc.add_paragraph()
+cap2.paragraph_format.space_after = Pt(4)
+r = cap2.add_run(
+    "Figure 2 — NWS storm-surge inundation map, 100-year annual exceedance probability, Corpus Christi inner "
+    "harbor. Surge-depth bands (4–6 ft up to 18–25 ft) define the inundation footprint that governs siting and "
+    "protective elevation of port power infrastructure. Source: National Weather Service.")
+r.font.size = Pt(8); r.font.color.rgb = MUTED; r.italic = True
+
 callout([
     ("Implication for backup power: ", True, False),
     ("shore power cannot assume grid availability during a Harvey-class event. For priority berths, "
@@ -374,11 +420,14 @@ callout([
     ("multi-day to ~2-week restoration window", True, False),
     (" — favoring on-site/standby generation paired with BESS rather than batteries alone — and coastal substations "
      "and switchgear must be hardened against storm surge and saltwater intrusion (elevated pads, "
-     "sealed/submersible-rated breakers) per the Port Aransas failure mode. Because the entrance and "
-     "La Quinta/Ingleside berths sit nearer the worst-hit zone than the Inner Harbor, backup duration should scale "
-     "by berth location.", False, False),
+     "sealed/submersible-rated breakers) per the Port Aransas failure mode. Equipment platform elevations should be "
+     "set from the USACE CHS / AEP analysis above. Because the entrance and La Quinta/Ingleside berths sit nearer "
+     "the worst-hit zone than the Inner Harbor, backup duration and protective elevation should scale by berth "
+     "location.", False, False),
 ], color="0F8A6A")
 
+# ---------- Page 4: resiliency measures ----------
+doc.add_page_break()
 heading("6. Resiliency Measures & Backup Power")
 bullets([
     [("N-1 redundancy & looped feeds: ", True, False), ("the dedicated port substation takes dual 138 kV sources "
@@ -422,9 +471,9 @@ pPr = src._p.get_or_add_pPr()
 pbdr = OxmlElement("w:pBdr")
 top = OxmlElement("w:top"); top.set(qn("w:val"), "single"); top.set(qn("w:sz"), "6"); top.set(qn("w:space"), "4"); top.set(qn("w:color"), "C9D2DD")
 pbdr.append(top); pPr.append(pbdr)
-r = src.add_run("Sources: USACE/Port Corpus Christi CCSC Channel Improvement Project (2019); ERCOT NPRR1234 / "
-                "PGRR115 & Harvey response; AEP Texas / ETT filings; U.S. DOE/EIA Hurricane Harvey event reports; "
-                "CPS Energy / Talen; IEC/IEEE 80005-1.")
+r = src.add_run("Sources: USACE CCSC Channel Improvement Project (2019) & Coastal Hazard System; NWS SLOSH "
+                "storm-surge inundation mapping; ERCOT NPRR1234 / PGRR115 & Harvey response; AEP Texas / ETT "
+                "filings; U.S. DOE/EIA Hurricane Harvey event reports; CPS Energy / Talen; IEC/IEEE 80005-1.")
 r.font.size = Pt(7.5); r.font.color.rgb = MUTED
 
 out = "/home/user/trustclaw/docs/corpus-shore-power-rfp/corpus-area-power-infrastructure.docx"
