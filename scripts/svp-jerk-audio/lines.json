@@ -1,0 +1,89 @@
+{
+  "title": "The SVP — A Departure in the Style of The Jerk",
+  "lines": [
+    {
+      "speaker": "NAVIN",
+      "emotion": "building, slightly manic",
+      "text": "The new SVP needs nothing from this place. Nothing at all! Except this degree.",
+      "pauseAfter": 0.5
+    },
+    {
+      "speaker": "NAVIN",
+      "emotion": "calmer, sentimental",
+      "text": "The degree is the only thing I need. The degree... and Darla. The degree and Darla — that's all I need.",
+      "pauseAfter": 0.6
+    },
+    {
+      "speaker": "NAVIN",
+      "emotion": "a beat, then remembering",
+      "text": "And the Hoosier guy. The degree, Darla, and the Hoosier guy. That's all I need.",
+      "pauseAfter": 0.5
+    },
+    {
+      "speaker": "NAVIN",
+      "emotion": "gaining speed",
+      "text": "And the telescope. The degree, Darla, the Hoosier guy, and the telescope from Afghanistan.",
+      "pauseAfter": 0.4
+    },
+    {
+      "speaker": "NAVIN",
+      "emotion": "triumphant",
+      "text": "And this piece of wire! The degree, Darla, the Hoosier guy, the telescope, and this piece of wire — that's all I need!",
+      "pauseAfter": 0.6
+    },
+    {
+      "speaker": "NAVIN",
+      "emotion": "indignant, ranting now",
+      "text": "I don't need this EBITDA bridge. I don't need the phantom hundred-and-fifty-million-dollar municipal pipeline. I don't need these COOs they parachuted onto the weakest divisions!",
+      "pauseAfter": 0.5
+    },
+    {
+      "speaker": "NAVIN",
+      "emotion": "trailing off, confused",
+      "text": "I don't need the Class B equity — well... I never had the Class B equity. That's the whole point.",
+      "pauseAfter": 0.7
+    },
+    {
+      "speaker": "DARLA",
+      "emotion": "flat, unimpressed",
+      "text": "The engine's running, Navin.",
+      "pauseAfter": 0.5
+    },
+    {
+      "speaker": "NAVIN",
+      "emotion": "rallying, striding",
+      "text": "Darla, the degree, the Hoosier guy, the telescope, AND the wire! That's the only stuff I need! I don't need anything el—",
+      "pauseAfter": 0.15
+    },
+    {
+      "speaker": "DARLA",
+      "emotion": "cutting in, deadpan",
+      "text": "And the reef tank.",
+      "pauseAfter": 0.4
+    },
+    {
+      "speaker": "NAVIN",
+      "emotion": "deflating",
+      "text": "...and the reef tank. The degree, Darla, the Hoosier guy, the telescope, the wire, and the reef tank. But that's it. That's all I need.",
+      "pauseAfter": 0.6
+    },
+    {
+      "speaker": "NAVIN",
+      "emotion": "muttering, a final thought",
+      "text": "...I might need a Red Sea Reefer four-fifty to hold the reef tank. But that's a separate conversation.",
+      "pauseAfter": 0.6
+    },
+    {
+      "speaker": "DARLA",
+      "emotion": "final word, dry",
+      "text": "Get in the car.",
+      "pauseAfter": 0.8
+    },
+    {
+      "speaker": "SFX",
+      "emotion": "Tesla door closes. Silence.",
+      "text": "",
+      "pauseAfter": 1.8
+    }
+  ]
+}
