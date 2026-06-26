@@ -55,7 +55,7 @@
   .fig { border: 1px solid var(--line); border-radius: 5px; padding: 6px; margin: 4px 0 6px; background: #fff; }
   .fig svg { display: block; margin: 0 auto; height: 2.35in; width: auto; max-width: 100%; }
   .fig img.surge { display: block; margin: 0 auto; max-width: 100%; max-height: 2.2in; border: 1px solid var(--line); border-radius: 4px; }
-  .surge-placeholder { display: flex; align-items: center; justify-content: center; height: 1.9in; border: 2px dashed var(--line); border-radius: 5px; background: var(--bg-soft); color: var(--muted); font-size: 9px; text-align: center; padding: 8px; }
+  .fig svg.surgesvg { height: 2.0in; width: auto; max-width: 100%; border: 1px solid var(--line); border-radius: 4px; }
   .figcap { font-size: 8.2px; color: var(--muted); margin-top: 3px; }
   .kpis { display: flex; gap: 8px; margin: 6px 0; }
   .kpi { flex: 1; background: var(--bg-soft); border: 1px solid var(--line); border-radius: 5px; padding: 6px 8px; }
@@ -416,11 +416,95 @@
   desktop analysis of <strong>annual exceedance probabilities (AEPs)</strong> to determine the required protective
   elevations for power infrastructure — substations, switchgear, and shore-power converters.</p>
   <div class="fig">
-    <div class="surge-placeholder">[ NWS storm-surge inundation map (100-yr annual exceedance probability),
-      Corpus Christi inner harbor — image to be embedded ]</div>
-    <div class="figcap">Figure 2 — NWS storm-surge inundation map, 100-year annual exceedance probability, Corpus
-    Christi inner harbor. Surge-depth bands (4–6 ft up to 18–25 ft) define the inundation footprint that governs
-    siting and protective elevation of port power infrastructure. Source: National Weather Service.</div>
+    <svg class="surgesvg" viewBox="0 0 1090 468" xmlns="http://www.w3.org/2000/svg" role="img"
+         aria-label="Schematic of the NWS storm-surge inundation map for the Corpus Christi inner harbor">
+      <!-- land base (No Inundation) -->
+      <rect x="0" y="0" width="1090" height="468" fill="#ece2c6"/>
+      <!-- Corpus Christi Bay -->
+      <path d="M1090,28 L1090,468 L712,468 Q606,398 586,300 Q567,205 540,150 L612,116 Q842,78 1090,28 Z" fill="#bfe0ef"/>
+      <!-- 18-25 ft (green): south Oso Bay lowlands + immediate bayfront -->
+      <path d="M250,468 Q300,398 388,386 Q474,376 548,360 Q612,346 662,372 L712,468 Z" fill="#549a44"/>
+      <path d="M540,150 L586,250 L560,330 L516,300 L512,206 Z" fill="#549a44"/>
+      <!-- 13-18 ft (yellow): inland fringe of the south zone + bayfront -->
+      <path d="M226,468 Q300,420 384,406 Q322,442 268,468 Z" fill="#f2e21a"/>
+      <path d="M452,150 L540,150 L516,214 L466,202 Z" fill="#f2e21a"/>
+      <path d="M548,360 Q612,346 662,372 L648,396 Q600,372 556,386 Z" fill="#f2e21a"/>
+      <!-- 9-13 ft (orange): transitional patches -->
+      <path d="M452,150 L466,202 L432,196 L440,158 Z" fill="#e8941f"/>
+      <path d="M388,386 Q440,378 470,392 L452,410 Q420,398 392,404 Z" fill="#e8941f"/>
+      <!-- 6-9 ft (purple): inner-harbor channel margins -->
+      <path d="M470,118 L540,150 L516,180 L476,164 Z" fill="#d7a6df"/>
+      <!-- 4-6 ft (red): broad north-shore band, inner-harbor plume, barrier island -->
+      <path d="M62,118 Q252,92 432,108 Q502,116 540,150 L520,176 Q400,150 250,160 Q140,168 70,176 Z" fill="#e23127"/>
+      <path d="M468,32 L520,32 L560,150 L500,150 Z" fill="#e23127"/>
+      <path d="M1044,26 Q1058,250 1046,468 L1090,468 L1090,26 Z" fill="#e23127"/>
+      <!-- ship channel (entrance to inner harbor) -->
+      <path d="M494,20 L520,150 Q540,210 560,240" fill="none" stroke="#5d9ec0" stroke-width="3"/>
+      <line x1="494" y1="20" x2="700" y2="40" stroke="#3f3f3f" stroke-width="1.2"/>
+
+      <!-- streets -->
+      <g stroke="#3a3a3a" stroke-width="1.3" fill="none">
+        <path d="M58,150 L330,150"/><path d="M300,176 L470,176"/>
+        <path d="M128,232 L362,226"/><path d="M190,290 L362,286"/>
+        <path d="M300,468 L382,300"/><path d="M362,468 L412,300"/>
+        <path d="M430,468 L456,322"/><path d="M500,468 L520,300"/>
+        <path d="M520,290 L545,182"/><path d="M298,402 L560,360"/>
+        <path d="M330,432 L560,406"/><path d="M300,468 L520,440"/>
+        <path d="M560,422 L662,402"/>
+      </g>
+      <g font-family="Segoe UI, Arial" font-size="13" fill="#1a2230">
+        <text x="96" y="144" transform="rotate(-3 96 144)">Leopard St</text>
+        <text x="316" y="170" transform="rotate(-4 316 170)">Up River Rd</text>
+        <text x="150" y="224">Agnes St</text>
+        <text x="210" y="282">Bear Ln</text>
+        <text x="300" y="360" transform="rotate(-66 300 360)">Greenwood Dr</text>
+        <text x="372" y="372" transform="rotate(-72 372 372)">Ayers St</text>
+        <text x="430" y="392" transform="rotate(-80 430 392)">Kostoryz Rd</text>
+        <text x="496" y="372" transform="rotate(-84 496 372)">S Staples St</text>
+        <text x="522" y="262" transform="rotate(-78 522 262)">Santa Fe St</text>
+        <text x="470" y="392">SPID</text>
+        <text x="470" y="424">Holly Rd</text>
+        <text x="356" y="456" transform="rotate(-6 356 456)">Saratoga Blvd</text>
+        <text x="566" y="418">McArdle Rd</text>
+      </g>
+
+      <!-- Bay label -->
+      <text x="744" y="226" font-family="Brush Script MT, Segoe Script, cursive" font-size="30" fill="#8fcbe4" font-style="italic">Corpus Christi</text>
+      <text x="800" y="260" font-family="Brush Script MT, Segoe Script, cursive" font-size="30" fill="#8fcbe4" font-style="italic">Bay</text>
+
+      <!-- Legend -->
+      <g font-family="Segoe UI, Arial" font-size="13" fill="#1a2230">
+        <rect x="884" y="16" width="196" height="156" fill="#ffffff" stroke="#9aa6b2" rx="3"/>
+        <text x="894" y="36" font-weight="bold" font-size="15">Inundation</text>
+        <rect x="894" y="46" width="22" height="14" fill="#e23127"/><text x="924" y="58">4 - 6 Feet</text>
+        <rect x="894" y="66" width="22" height="14" fill="#d7a6df"/><text x="924" y="78">6 - 9 Feet</text>
+        <rect x="894" y="86" width="22" height="14" fill="#e8941f"/><text x="924" y="98">9 - 13 Feet</text>
+        <rect x="894" y="106" width="22" height="14" fill="#f2e21a"/><text x="924" y="118">13 - 18 Feet</text>
+        <rect x="894" y="126" width="22" height="14" fill="#549a44"/><text x="924" y="138">18 - 25 Feet</text>
+        <rect x="894" y="146" width="22" height="14" fill="#ece2c6" stroke="#9aa6b2"/><text x="924" y="158">No Inundation</text>
+      </g>
+      <!-- scale bar -->
+      <g font-family="Segoe UI, Arial" font-size="11" fill="#1a2230">
+        <rect x="900" y="248" width="120" height="7" fill="#fff" stroke="#1a2230"/>
+        <rect x="900" y="248" width="20" height="7" fill="#1a2230"/>
+        <rect x="940" y="248" width="20" height="7" fill="#1a2230"/>
+        <rect x="980" y="248" width="20" height="7" fill="#1a2230"/>
+        <text x="896" y="245">0  0.5  1     2     3    4</text>
+      </g>
+      <!-- compass -->
+      <g transform="translate(992,360)" font-family="Segoe UI, Arial" font-size="12" fill="#1a2230">
+        <circle r="26" fill="#fff" stroke="#9aa6b2"/>
+        <path d="M0,-22 L6,0 L0,-4 L-6,0 Z" fill="#1a2230"/>
+        <path d="M0,22 L6,0 L0,4 L-6,0 Z" fill="#9aa6b2"/>
+        <text x="-4" y="-28">N</text><text x="-4" y="38">S</text>
+        <text x="30" y="4">E</text><text x="-38" y="4">W</text>
+      </g>
+    </svg>
+    <div class="figcap">Figure 2 — Storm-surge inundation footprint, Corpus Christi inner harbor (NWS surge-depth
+    bands, 4–6 ft up to 18–25 ft). <em>Schematic representation of the published National Weather Service map,
+    pending the source raster.</em> The footprint — surge entering via the ship channel into the inner harbor and
+    propagating up the low-lying corridors — governs siting and protective elevation of port power infrastructure.
+    Source: National Weather Service (SLOSH).</div>
   </div>
   <div class="callout" style="border-left-color:#0f8a6a;">
     <strong>Implication for backup power:</strong> shore power <em>cannot</em> assume grid availability during a
