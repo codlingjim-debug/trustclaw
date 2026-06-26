@@ -507,14 +507,17 @@
     Source: National Weather Service (SLOSH).</div>
   </div>
   <div class="callout" style="border-left-color:#0f8a6a;">
-    <strong>Implication for backup power:</strong> shore power <em>cannot</em> assume grid availability during a
-    Harvey-class event. For priority berths, backup/islanding should be sized to a <strong>multi-day to ~2-week
-    restoration window</strong> — favoring on-site/standby generation paired with BESS rather than batteries alone —
-    and coastal substations and switchgear must be <strong>hardened against storm surge and saltwater intrusion</strong>
-    (elevated pads, sealed/submersible-rated breakers) per the Port Aransas failure mode. Equipment platform
-    elevations should be set from the USACE CHS / AEP analysis above. Because the entrance and
-    La&nbsp;Quinta/Ingleside berths sit nearer the worst-hit zone than the Inner Harbor, backup duration and
-    protective elevation should scale by berth location.
+    <strong>Implication for backup power — vessels depart before landfall.</strong> Under the U.S. Coast Guard
+    Captain of the Port (COTP) heavy-weather protocol and the port's hurricane plan, vessels above a defined tonnage
+    must <strong>leave berth (typically ≥24 hours before landfall)</strong> because the moorings cannot withstand
+    tropical-cyclone forces. A Harvey-class grid outage therefore coincides with a port that has <strong>no large
+    vessels at berth — effectively no hotelling load to serve</strong> during the storm and its multi-day
+    restoration. This largely <strong>moots the case for dedicated, storm-duration backup generation or islanding
+    sized to vessel load.</strong> The resilience priority instead shifts to <strong>survive-and-restore</strong>:
+    (1)&nbsp;harden and elevate the shore-power equipment so it survives surge and saltwater — platform elevations set
+    from the USACE CHS / AEP analysis above — and (2)&nbsp;re-energize rapidly so berths are ready when vessels
+    return. Any on-site backup is limited to controls/SCADA, life-safety, and brief ride-through — not multi-MW
+    hotelling supply.
   </div>
 
   <div class="footer">
@@ -544,16 +547,18 @@
         supports local voltage and resource adequacy during import constraints.</li>
         <li><strong>BESS:</strong> peak-shaving, ride-through for momentary disturbances, and smoother load steps as
         vessels connect/disconnect.</li>
-        <li><strong>On-site / standby generation:</strong> for storm-duration islanding beyond battery economics,
-        sized to priority-berth load over the expected restoration window.</li>
+        <li><strong>Right-sized backup (not storm-duration):</strong> because vessels evacuate before landfall,
+        backup is limited to controls/SCADA, security, and brief ride-through — <em>no</em> multi-MW standby
+        generation for hotelling load during a storm outage.</li>
       </ul>
     </div>
     <div class="col">
       <ul>
-        <li><strong>Microgrid &amp; islanding:</strong> island critical berths on local generation/BESS during grid
-        outages, with black-start capability for priority docks.</li>
-        <li><strong>Storm hardening:</strong> elevated/flood-rated pads, wind-rated structures, sealed/surge-rated
-        switchgear, and corrosion protection for the marine/salt-air environment.</li>
+        <li><strong>Microgrid &amp; islanding:</strong> optional islanding of a berth on local BESS during brief,
+        non-storm transmission disturbances; not relied upon for hurricanes, when berths are vacated.</li>
+        <li><strong>Storm hardening &amp; elevation (primary storm measure):</strong> elevated/flood-rated pads set
+        from the CHS/AEP analysis, wind-rated structures, sealed/surge-rated switchgear, and corrosion protection so
+        the asset survives and restores quickly.</li>
         <li><strong>Power quality:</strong> frequency conversion (50/60&nbsp;Hz vessels), harmonic mitigation, and
         reactive support so HVSC does not degrade local distribution.</li>
         <li><strong>Redundant conversion:</strong> N+1 shore-power converters/transformers so one failed unit does
@@ -562,17 +567,19 @@
     </div>
   </div>
   <div class="callout">
-    <strong>Resiliency target:</strong> priority berths ride through a single transmission contingency without
-    interruption and can island for a defined storm-restoration window — protecting air-quality compliance and
-    continuity of port operations through the next Harvey-class event.
+    <strong>Resiliency target:</strong> during normal operations, priority berths ride through a single transmission
+    contingency without interruption; for hurricanes, the objective is <strong>survive-and-restore</strong> —
+    equipment hardened and elevated to survive surge while vessels are evacuated, then rapidly re-energized — rather
+    than sustained backup of an absent hotelling load.
   </div>
 
   <p class="sub" style="margin-top:6px;"><strong>What our feasibility study will deliver:</strong> (1) surveyed
   per-berth load profiles and coincident-demand diversity; (2) a costed Phase 1 pilot vs. Phase 4 138 kV substation
   comparison; (3) a mapped ERCOT/AEP Texas interconnection pathway with LLIS timing; (4) a recommended BESS/microgrid
-  resiliency package with availability targets; and (5) a <strong>storm-resilience basis of design benchmarked to
-  Hurricane Harvey</strong>, sizing backup/islanding to the expected restoration window by berth location —
-  concluding with a go/no-go recommendation and a phased implementation roadmap.</p>
+  resiliency package with availability targets; and (5) a <strong>storm-resilience basis of design</strong> reflecting
+  the COTP vessel-departure protocol — confirming that hardening, protective elevation, and rapid restoration (not
+  storm-duration backup generation) are the right investments — benchmarked to Hurricane Harvey, and concluding with
+  a go/no-go recommendation and a phased implementation roadmap.</p>
 
   <div class="footer">
     <span>Sources: USACE CCSC CIP (2019) &amp; Coastal Hazard System; NWS SLOSH storm-surge inundation mapping; ERCOT NPRR1234 / PGRR115 &amp; Harvey response; AEP Texas / ETT filings; U.S. DOE/EIA Harvey event reports; CPS Energy / Talen; IEC/IEEE 80005-1.</span>

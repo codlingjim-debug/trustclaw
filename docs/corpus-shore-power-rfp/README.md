@@ -15,11 +15,12 @@ locations, the AEP Texas 138 kV ring, the 345 kV backbone, key substations, and 
 - `corpus-area-power-infrastructure.docx` — Word version (same content; the map is embedded as a high-resolution
   image since Word does not render inline SVG reliably across versions).
 
-> **Pending asset — Figure 2 (storm-surge map):** Section 5 references an NWS storm-surge inundation map
-> (100-yr annual exceedance probability) for the Corpus Christi inner harbor. The graphic is currently a
-> placeholder. To embed it, drop the image at `assets/storm-surge-corpus.png` (HTML) / `storm-surge-corpus.png`
-> next to `generate-docx.py` (Word) and re-render. Inline-pasted images are not accessible to the build — attach
-> the file so it lands on disk.
+> **Figure 2 (storm-surge map) — schematic stand-in:** Section 5 includes a storm-surge inundation infographic.
+> It is currently a **schematic recreation** of the published NWS surge-band map (inline SVG in the HTML; rasterized
+> PNG under `assets/storm-surge-corpus.png` for Word), captioned as such. To swap in the authentic NWS raster for
+> final submission, replace `assets/storm-surge-corpus.png`, point the HTML `<svg class="surgesvg">` block at it (or
+> drop in an `<img>`), and re-render. Inline-pasted images are not accessible to the build — attach the file so it
+> lands on disk.
 
 ## How to use
 
@@ -34,7 +35,7 @@ locations, the AEP Texas 138 kV ring, the 345 kV backbone, key substations, and 
 3. Phased buildout — 2 berths → 20 berths (~10 MW → ~100 MW)
 4. ERCOT interconnection for loads of this size (NPRR1234 / PGRR115, LLIS)
 5. Transmission reliability & the Hurricane Harvey benchmark; coastal storm-surge exposure (NWS SLOSH / USACE CHS)
-6. Resiliency measures & backup power (N-1, BESS, standby gen, microgrid/islanding, storm hardening)
+6. Resiliency measures & backup power — survive-and-restore (N-1, BESS, storm hardening/elevation); vessels evacuate pre-landfall, so no storm-duration hotelling backup
 
 ## Key planning figures
 
@@ -67,6 +68,7 @@ locations, the AEP Texas 138 kV ring, the 345 kV backbone, key substations, and 
 - [ERCOT — Responds to Hurricane Harvey](https://www.ercot.com/help/harvey)
 - [NWS — Storm surge / SLOSH (Maximum of Maximums) inundation mapping](https://www.nhc.noaa.gov/nationalsurge/)
 - [USACE — Coastal Hazards System (CHS)](https://chs.erdc.dren.mil/)
+- [USCG — Captain of the Port (COTP) heavy-weather / port conditions (Hurricane & Severe Weather)](https://www.dco.uscg.mil/Our-Organization/Assistant-Commandant-for-Prevention-Policy-CG-5P/Inspections-Compliance-CG-5PC-/Office-of-Port-Facility-Compliance/)
 
 > Figures are planning-level approximations for RFP framing. Substation positions on the map are
 > schematic and not to scale; a surveyed GIS alignment should be developed during preliminary engineering.

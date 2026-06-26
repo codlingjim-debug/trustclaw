@@ -408,22 +408,29 @@ else:
 cap2 = doc.add_paragraph()
 cap2.paragraph_format.space_after = Pt(4)
 r = cap2.add_run(
-    "Figure 2 — NWS storm-surge inundation map, 100-year annual exceedance probability, Corpus Christi inner "
-    "harbor. Surge-depth bands (4–6 ft up to 18–25 ft) define the inundation footprint that governs siting and "
-    "protective elevation of port power infrastructure. Source: National Weather Service.")
+    "Figure 2 — Storm-surge inundation footprint, Corpus Christi inner harbor (NWS surge-depth bands, 4–6 ft up to "
+    "18–25 ft). Schematic representation of the published National Weather Service map, pending the source raster. "
+    "The footprint — surge entering via the ship channel into the inner harbor and propagating up the low-lying "
+    "corridors — governs siting and protective elevation of port power infrastructure. Source: National Weather "
+    "Service (SLOSH).")
 r.font.size = Pt(8); r.font.color.rgb = MUTED; r.italic = True
 
 callout([
-    ("Implication for backup power: ", True, False),
-    ("shore power cannot assume grid availability during a Harvey-class event. For priority berths, "
-     "backup/islanding should be sized to a ", False, False),
-    ("multi-day to ~2-week restoration window", True, False),
-    (" — favoring on-site/standby generation paired with BESS rather than batteries alone — and coastal substations "
-     "and switchgear must be hardened against storm surge and saltwater intrusion (elevated pads, "
-     "sealed/submersible-rated breakers) per the Port Aransas failure mode. Equipment platform elevations should be "
-     "set from the USACE CHS / AEP analysis above. Because the entrance and La Quinta/Ingleside berths sit nearer "
-     "the worst-hit zone than the Inner Harbor, backup duration and protective elevation should scale by berth "
-     "location.", False, False),
+    ("Implication for backup power — vessels depart before landfall. ", True, False),
+    ("Under the U.S. Coast Guard Captain of the Port (COTP) heavy-weather protocol and the port's hurricane plan, "
+     "vessels above a defined tonnage must ", False, False),
+    ("leave berth (typically ≥24 hours before landfall)", True, False),
+    (" because the moorings cannot withstand tropical-cyclone forces. A Harvey-class grid outage therefore coincides "
+     "with a port that has ", False, False),
+    ("no large vessels at berth — effectively no hotelling load to serve", True, False),
+    (" during the storm and its multi-day restoration. This largely ", False, False),
+    ("moots the case for dedicated, storm-duration backup generation or islanding sized to vessel load.", True, False),
+    (" The resilience priority instead shifts to ", False, False),
+    ("survive-and-restore", True, False),
+    (": (1) harden and elevate the shore-power equipment so it survives surge and saltwater (platform elevations set "
+     "from the USACE CHS / AEP analysis above), and (2) re-energize rapidly so berths are ready when vessels return. "
+     "Any on-site backup is limited to controls/SCADA, life-safety, and brief ride-through — not multi-MW "
+     "hotelling supply.", False, False),
 ], color="0F8A6A")
 
 # ---------- Page 4: resiliency measures ----------
@@ -436,20 +443,23 @@ bullets([
         "supports local voltage and resource adequacy during import constraints.", False, False)],
     [("BESS: ", True, False), ("peak-shaving, ride-through for momentary disturbances, and smoother load steps as "
         "vessels connect/disconnect.", False, False)],
-    [("On-site / standby generation: ", True, False), ("for storm-duration islanding beyond battery economics, "
-        "sized to priority-berth load over the expected restoration window.", False, False)],
-    [("Microgrid & islanding: ", True, False), ("island critical berths on local generation/BESS during grid "
-        "outages, with black-start capability for priority docks.", False, False)],
-    [("Storm hardening: ", True, False), ("elevated/flood-rated pads, wind-rated structures, sealed/surge-rated "
-        "switchgear, and corrosion protection for the marine/salt-air environment.", False, False)],
+    [("Right-sized backup (not storm-duration): ", True, False), ("because vessels evacuate before landfall, backup "
+        "is limited to controls/SCADA, security, and brief ride-through — no multi-MW standby generation for "
+        "hotelling load during a storm outage.", False, False)],
+    [("Microgrid & islanding: ", True, False), ("optional islanding of a berth on local BESS during brief, "
+        "non-storm transmission disturbances; not relied upon for hurricanes, when berths are vacated.", False, False)],
+    [("Storm hardening & elevation (primary storm measure): ", True, False), ("elevated/flood-rated pads set from "
+        "the CHS/AEP analysis, wind-rated structures, sealed/surge-rated switchgear, and corrosion protection so the "
+        "asset survives and restores quickly.", False, False)],
     [("Power quality & redundant conversion: ", True, False), ("frequency conversion (50/60 Hz vessels), harmonic "
         "mitigation, reactive support, and N+1 shore-power converters so one failed unit does not strand a berth.", False, False)],
 ])
 callout([
     ("Resiliency target: ", True, False),
-    ("priority berths ride through a single transmission contingency without interruption and can island for a "
-     "defined storm-restoration window — protecting air-quality compliance and continuity of port operations "
-     "through the next Harvey-class event.", False, False),
+    ("during normal operations, priority berths ride through a single transmission contingency without "
+     "interruption; for hurricanes, the objective is survive-and-restore — equipment hardened and elevated to "
+     "survive surge while vessels are evacuated, then rapidly re-energized — rather than sustained backup of an "
+     "absent hotelling load.", False, False),
 ])
 
 # closing
@@ -460,8 +470,10 @@ add_runs(p, [
     ("(1) surveyed per-berth load profiles and coincident-demand diversity; (2) a costed Phase 1 pilot vs. "
      "Phase 4 138 kV substation comparison; (3) a mapped ERCOT/AEP Texas interconnection pathway with LLIS timing; "
      "(4) a recommended BESS/microgrid resiliency package with availability targets; and (5) a storm-resilience "
-     "basis of design benchmarked to Hurricane Harvey, sizing backup/islanding to the expected restoration window "
-     "by berth location — concluding with a go/no-go recommendation and a phased implementation roadmap.", False, False),
+     "basis of design reflecting the COTP vessel-departure protocol — confirming that hardening, protective "
+     "elevation, and rapid restoration (not storm-duration backup generation) are the right investments — "
+     "benchmarked to Hurricane Harvey, and concluding with a go/no-go recommendation and a phased implementation "
+     "roadmap.", False, False),
 ], size=9.5)
 
 # sources
