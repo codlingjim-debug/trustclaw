@@ -5,7 +5,7 @@ An elegant, single-file dashboard for tracking the Bentwater Holiday Home Tour c
 ## Features
 
 - **Dashboard** — live metrics (complete / in progress / blocked / overdue), overall completion bar, progress by month, next deadlines
-- **Tasks** — all 47 tasks from the committee binder, filterable and searchable, with editable owners, due dates, status pills, and notes; overdue items auto-flag in red
+- **Tasks** — the full committee plan (Jan–July prep through the January wrap-up), filterable and searchable, with editable owners, due dates, status pills, and notes; overdue items auto-flag in red
 - **Homes · Volunteers · Tickets · Budget · Contacts** — one tab per section of the binder, all editable in place
 - **✦ Guide Me** — a step-by-step spotlight walkthrough of the whole app (auto-offers on first visit; also available from the floating button)
 - **Autosave** — everything persists in the browser (localStorage); **Export / Import Data** moves a JSON snapshot between teammates or machines

@@ -368,7 +368,7 @@
   <!-- ======== TASKS ======== -->
   <section class="tabpage" id="page-tasks">
     <div class="panel">
-      <div class="panel-head"><h2>Master Task Tracker</h2><span class="hint">all 47 tasks from the committee binder</span></div>
+      <div class="panel-head"><h2>Master Task Tracker</h2><span class="hint">the committee plan, phase by phase</span></div>
       <div class="panel-body">
         <div class="filters" id="tour-filters">
           <select id="fMonth"><option value="">All months</option></select>
@@ -388,11 +388,11 @@
   <!-- ======== HOMES ======== -->
   <section class="tabpage" id="page-homes">
     <div class="panel">
-      <div class="panel-head"><h2>Homes &amp; Homeowners</h2><span class="hint">everything the June homeowner email requests</span></div>
+      <div class="panel-head"><h2>Homes &amp; Homeowners</h2><span class="hint">name, address, email &amp; phone for each of the 4 tour homes</span></div>
       <div class="panel-body">
         <div class="tbl-wrap">
           <table>
-            <thead><tr><th>#</th><th>Homeowner(s)</th><th>Address</th><th>Phone</th><th>Emails</th><th>Charity (501c3)</th><th>Photo Day</th><th>Photo</th><th>Bio 100–130w</th><th>Watercolor</th><th>Coordinator / Hostess</th></tr></thead>
+            <thead><tr><th>#</th><th>Homeowner(s)</th><th>Address</th><th>Phone</th><th>Email</th><th>Charity (501c3)</th><th>Photo Day</th><th>Photo</th><th>Bio</th><th>Watercolor</th><th>House Manager / Hostess</th></tr></thead>
             <tbody id="homesBody"></tbody>
           </table>
         </div>
@@ -501,39 +501,27 @@
 <script>
 "use strict";
 /* ============================== DATA ============================== */
-const MONTHS = ["DEC – MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER","JANUARY"];
+const MONTHS = ["JAN – JULY","AUG – SEPT","OCTOBER","NOVEMBER","DECEMBER","JANUARY"];
 const STATUSES = ["Not Started","In Progress","Done","Blocked","N/A"];
 const ST_CLASS = {"Not Started":"st-not","In Progress":"st-prog","Done":"st-done","Blocked":"st-block","N/A":"st-na"};
 
 const DEFAULT_TASKS = [
-["DEC – MAY","Secure 4–5 homes for the tour","Confirm homeowners; charities of choice must be a registered 501(c)(3).","2026-05-31"],
-["DEC – MAY","Select the Home Tour Committee","Recruit your committee members for the season.","2026-05-31"],
-["DEC – MAY","Write intro letters to homeowners","Use the sample letter/email from the binder as the template.","2026-05-31"],
-["DEC – MAY","Select hostess/home for Appreciation Party","Usually hosted by the prior HHT Chair — confirm they can do it.","2026-05-31"],
-["DEC – MAY","Confirm Annette Young as tour artist","Check she can still create the watercolors of the homes.","2026-05-31"],
-["DEC – MAY","Coordinate donations to fund the tour","The BLO president usually solicits the funding donations.","2026-05-31"],
-["JUNE","Send intro emails to homeowners","Introduce yourself + committee and share the timeline of what you need and when.","2026-06-15"],
-["JUNE","Collect homeowner info","Names, home address, contact phone, notification emails, and name of charity.","2026-06-30"],
-["JUNE","Schedule photo day per home","Confirm the day convenient to each homeowner for the exterior photo.","2026-06-30"],
-["JULY","Take exterior photos of each home","Before Jul 31 — make sure holiday decorations are DOWN. Spring works too if homes secured early.","2026-07-31"],
-["JULY","Deliver photos to Annette Young","Get photos to the artist by Jul 31 so she has time for the watercolors.","2026-07-31"],
-["JULY","Collect 100–130 word bios","Short bio of home & homeowners + description of the charity.","2026-07-31"],
-["JULY","Obtain Bentwater Life print deadlines","For article submissions (contact: Pat Wright, communications).","2026-07-31"],
-["JULY","Obtain online BLO newsletter deadlines","Deadlines for the online BLO newsletter.","2026-07-31"],
-["AUGUST","Begin brochure & ticket layout","Once all homeowner info + pics are in, start setting up the brochure.","2026-08-31"],
-["AUGUST","Get brochure proofread (3 people)","At least 3 people proofread for mistakes before printing anything.","2026-08-31"],
-["AUGUST","Confirm tour route with Randy (POA)","POA maintenance bldg — route must match assigned home # order. Randy 936-446-8391.","2026-08-31"],
-["AUGUST","Announce homes at BLO meetings","Announce the homes at the Aug/Sep BLO meetings.","2026-08-31"],
-["AUGUST","Brief the Home Tour Committee","Meet with committee to familiarize them with the process.","2026-08-31"],
-["AUGUST","Table + sign-up sheets at BLO meetings","Have a table and volunteer sign-up sheets at the BLO meetings.","2026-08-31"],
-["SEPTEMBER","Get Home Tour blurb to Pat Wright","Bentwater Life November publication — submit the Home Tour blurb.","2026-09-15"],
-["SEPTEMBER","Line up Homeowners Preview Party home","Confirm host; give a headcount estimate — homeowners & invited guests only.","2026-09-15"],
-["SEPTEMBER","Develop QR-code map for printer","QR code doubles as the map (Luann Banks made it previously).","2026-09-15"],
-["SEPTEMBER","Submit all info to printer","Complete write-ups + pictures; everything to the printer by mid-September.","2026-09-15"],
-["SEPTEMBER","Submit publicity articles","Per the deadlines obtained in July.","2026-09-30"],
-["SEPTEMBER","Start volunteer sign-ups (Sep–Nov)","Run volunteer sign-ups at the Sep–Nov BLO meetings.","2026-09-30"],
-["OCTOBER","Print brochures, maps & tickets","Ask printer to fold brochures & maps and cut the tickets.","2026-10-10"],
-["OCTOBER","Have tickets ready for October BLO","Tickets/brochures ready to SELL at the October BLO meeting.","2026-10-15"],
+["JAN – JULY","Create the holiday advertising image","One image, two uses: printed on a 3′ foam posterboard and digital for the BLO website, Bentwater Life, and other advertising.","2026-02-28"],
+["JAN – JULY","Advertise homes needed for the tour","Run the holiday image everywhere — BLO website, Bentwater Life, etc. — to recruit tour homes.","2026-03-31"],
+["JAN – JULY","Secure 4 homes in the community","Record Name, Address, Email & Phone for each homeowner (one line per home on the Homes tab).","2026-05-31"],
+["JAN – JULY","Draft the introductory homeowner email","Confirm participation; request their 501(c)(3) charity of choice; invite them to the homeowner dinner & tour of one another's homes (date & times); give both Holiday Home Tour dates & times, 4–8 pm. See binder for example.","2026-06-01"],
+["JAN – JULY","Have intro email approved by the Board","The Board must approve the letter before it is sent.","2026-06-10"],
+["JAN – JULY","Send intro emails to homeowners","Include that a professional photographer will take photos, and that their charity choice + a bio of home & family are needed for tickets and brochures by July 31.","2026-06-15"],
+["JAN – JULY","Collect charity selections & family/home bios","501(c)(3) charity + bio of their home and family from each homeowner — needed for tickets & brochures by Jul 31.","2026-07-31"],
+["JAN – JULY","Professional photographer shoots each home","Schedule and complete the photos for tickets & brochures by Jul 31.","2026-07-31"],
+["AUG – SEPT","Board approval: tickets, brochures & foam board","Get BLO Board approval of the ticket, brochure, and presentation foam board designs before printing.","2026-08-31"],
+["AUG – SEPT","Print tickets, brochures & presentation foam board","Include the QR code for the home tour map. Everything must be ready before the October BLO meeting.","2026-09-30"],
+["AUG – SEPT","Announce homes at the Aug/Sept BLO meetings","","2026-09-30"],
+["AUG – SEPT","Secure House Managers","One manager per tour home for the event nights.","2026-09-30"],
+["AUG – SEPT","Volunteer sign-up sheet at August BLO meeting","Table + sign-up sheet to start recruiting volunteers.","2026-08-31"],
+["AUG – SEPT","Submit publicity articles per deadlines","BLO website, Bentwater Life, etc.","2026-09-30"],
+["AUG – SEPT","Update the Board at BLO board meetings","Attend board meetings to keep the Board current on the Home Tour.","2026-09-30"],
+["OCTOBER","Tickets & brochures on sale at October BLO","Everything printed and ready to sell at the October BLO meeting.","2026-10-15"],
 ["OCTOBER","Number & bundle tickets","Staple each bundle: ticket on top (so # shows), then map & brochure.","2026-10-20"],
 ["OCTOBER","Set up ticket-bundle sign-out sheets","Sets of 10; track who has which numbers and that the correct $ comes back.","2026-10-20"],
 ["OCTOBER","Meet POA rep & drive the neighborhood","Randy oversees traffic signs; have a traffic pattern in mind first.","2026-10-31"],
@@ -557,7 +545,7 @@ const DEFAULT_TASKS = [
 
 const DEFAULT_STATE = () => ({
   tasks: DEFAULT_TASKS.map((t,i)=>({id:i, month:t[0], task:t[1], detail:t[2], owner:"", due:t[3], status:"Not Started", notes:""})),
-  homes: Array.from({length:5},(_,i)=>({num:i+1, owners:"", address:"", phone:"", emails:"", charity:"", photoDay:"", photo:"Pending", bio:"Pending", watercolor:"Not started", hostess:""})),
+  homes: Array.from({length:4},(_,i)=>({num:i+1, owners:"", address:"", phone:"", emails:"", charity:"", photoDay:"", photo:"Pending", bio:"Pending", watercolor:"Not started", hostess:""})),
   volunteers: [],
   bundles: Array.from({length:5},(_,i)=>({num:i+1, range:"", seller:"", expected:"", turnedIn:"", rec:"No"})),
   salesPoints: ["Holiday Market","POA office (checks only)","Area Pro Group","Mix & Mingles","Gourmet Group Cocktail Party","BLO bus trips","Golf tournaments","Board members (10 each)"].map(n=>({name:n, done:"No"})),
@@ -571,7 +559,7 @@ const DEFAULT_STATE = () => ({
     {item:"Appreciation & Preview parties",cat:"Expense",amount:"",notes:""},
     {item:"Signage & easels",cat:"Expense",amount:"",notes:""}
   ],
-  charities: Array.from({length:5},()=>({charity:"", home:"", amount:"", status:"Not started"})),
+  charities: Array.from({length:4},()=>({charity:"", home:"", amount:"", status:"Not started"})),
   contacts: [
     {name:"Randy", role:"POA representative (traffic signs / route)", phone:"936-446-8391", notes:"Meet before finalizing traffic pattern; POA maintenance bldg."},
     {name:"Annette Young", role:"Home Tour artist (watercolors)", phone:"", notes:"Confirm availability early; needs photos by Jul 31."},
@@ -583,7 +571,7 @@ const DEFAULT_STATE = () => ({
   ]
 });
 
-const KEY = "bentwater-hht-2026-v1";
+const KEY = "bentwater-hht-2026-v2";
 let S;
 try { S = Object.assign(DEFAULT_STATE(), JSON.parse(localStorage.getItem(KEY) || "null") || {}); }
 catch(e){ S = DEFAULT_STATE(); }
@@ -687,10 +675,10 @@ function renderHomes(){
 function renderVols(){
   $("#volBody").innerHTML = S.volunteers.map((v,i)=>`
     <tr>
-      <td>${pillSel("st-not",["","Home 1","Home 2","Home 3","Home 4","Home 5","Floater"],v.home,`data-c="volunteers" data-i="${i}" data-f="home" style="min-width:88px;background:var(--cream2);color:var(--ink)"`)}</td>
+      <td>${pillSel("st-not",["","Home 1","Home 2","Home 3","Home 4","Floater"],v.home,`data-c="volunteers" data-i="${i}" data-f="home" style="min-width:88px;background:var(--cream2);color:var(--ink)"`)}</td>
       <td>${pillSel("st-not",["","Wed","Thu","Both"],v.day,`data-c="volunteers" data-i="${i}" data-f="day" style="min-width:70px;background:var(--cream2);color:var(--ink)"`)}</td>
       <td>${pillSel("st-not",["","4:00–6:15","5:45–8:00","Setup","Teardown"],v.shift,`data-c="volunteers" data-i="${i}" data-f="shift" style="min-width:100px;background:var(--cream2);color:var(--ink)"`)}</td>
-      <td>${pillSel("st-not",["","Hostess","Coordinator","Parking","Greeter","Ticket table"],v.role,`data-c="volunteers" data-i="${i}" data-f="role" style="min-width:100px;background:var(--cream2);color:var(--ink)"`)}</td>
+      <td>${pillSel("st-not",["","House Manager","Hostess","Coordinator","Parking","Greeter","Ticket table"],v.role,`data-c="volunteers" data-i="${i}" data-f="role" style="min-width:100px;background:var(--cream2);color:var(--ink)"`)}</td>
       <td>${inp("volunteers",i,"name",v.name,"name…")}</td>
       <td>${inp("volunteers",i,"phone",v.phone,"phone…")}</td>
       <td>${inp("volunteers",i,"email",v.email,"email…")}</td>
@@ -832,13 +820,13 @@ const TOUR = [
   {tab:null, sel:null, title:"Welcome to the Home Tour HQ ✦", text:"This is your committee's single source of truth for the Bentwater Holiday Home Tour. Everything from the binder now lives here — and this quick tour shows you around. Use Next, or press → on your keyboard."},
   {tab:"dashboard", sel:"#metrics", title:"Your season at a glance", text:"These cards count themselves. As tasks get marked Done, In Progress, or Blocked on the Tasks tab, the totals — including anything overdue — update instantly."},
   {tab:"dashboard", sel:"#tour-progress", title:"Overall completion", text:"The evergreen bar fills as the committee works the plan. N/A tasks are excluded so the percentage stays honest."},
-  {tab:"dashboard", sel:"#monthProgress", title:"Progress by month", text:"The binder's plan runs Dec–May prep through the January wrap-up. Each month gets its own bar, so you can see at a glance whether August is keeping pace."},
+  {tab:"dashboard", sel:"#monthProgress", title:"Progress by phase", text:"The plan runs Jan–July prep through the January wrap-up. Each phase gets its own bar, so you can see at a glance whether Aug–Sept is keeping pace."},
   {tab:"dashboard", sel:"#upcoming", title:"Next deadlines", text:"The seven soonest unfinished tasks, sorted by due date. Anything already late shows in velvet red with a warning flag."},
   {tab:"dashboard", sel:"#tour-tabs", title:"Seven rooms in the house", text:"Dashboard for the view, Tasks for the work, then Homes, Volunteers, Tickets, Budget, and Contacts — each tab mirrors a section of the committee binder."},
   {tab:"tasks", sel:"#tour-filters", title:"Find any task fast", text:"Filter by month or status, or just type — “Randy”, “brochure”, “tickets” — and the table narrows as you type."},
-  {tab:"tasks", sel:"#taskTable", title:"The master tracker", text:"All 47 binder tasks with their details. Click any Owner, Due, or Notes cell to edit it in place. Set the Status pill and watch it change color — overdue due-dates flag themselves in red."},
-  {tab:"homes", sel:"#page-homes .panel", title:"Homes & homeowners", text:"One row per tour home, with every field the June homeowner email requests — contact info, charity, photo day, the 100–130-word bio, and the watercolor's journey from photo to framed gift."},
-  {tab:"volunteers", sel:"#page-volunteers .panel", title:"Volunteers & shifts", text:"Build your roster here: hostesses, coordinators, parking (aim for two per home per shift — flashlights required!). Add rows as sign-ups come in from the BLO meetings."},
+  {tab:"tasks", sel:"#taskTable", title:"The master tracker", text:"Every task in the plan with its details. Click any Owner, Due, or Notes cell to edit it in place. Set the Status pill and watch it change color — overdue due-dates flag themselves in red."},
+  {tab:"homes", sel:"#page-homes .panel", title:"Homes & homeowners", text:"One line per tour home: name, address, email & phone, plus their 501(c)(3) charity, the photographer's photo day, the family/home bio, and the watercolor's journey from photo to framed gift."},
+  {tab:"volunteers", sel:"#page-volunteers .panel", title:"Volunteers & shifts", text:"Build your roster here: House Managers, hostesses, parking (aim for two per home per shift — flashlights required!). Add rows as sign-ups come in from the BLO meetings."},
   {tab:"tickets", sel:"#page-tickets .panel", title:"Tickets & sales points", text:"Sign out bundles of ten, track who has which numbers and the money turned in — totals reconcile automatically. Below, tick off each sales point as it's set up."},
   {tab:"budget", sel:"#page-budget .panel", title:"Budget & charities", text:"Log income and expenses; the Net-to-Charities figure updates live. The distribution table tracks each charity's donation letter and payout."},
   {tab:"dashboard", sel:".hero-actions", title:"Sharing with the team", text:"Your work autosaves in this browser. Use Export Data to hand a teammate a snapshot file, and Import Data to load one back in. When the site's on Netlify, everyone uses the same link — same warm little HQ."}
