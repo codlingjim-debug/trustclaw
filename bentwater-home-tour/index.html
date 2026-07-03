@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bentwater Holiday Home Tour — Task Manager</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎄</text></svg>" />
+<style>
+  :root{
+    --stone:#2B2A28; --stone2:#45423E; --stone-d:#1B1A18;
+    --crimson:#7C1D1D; --crimson-d:#5E1414;
+    --gold:#B58A3A; --gold-d:#8C6A28; --gold-l:#EBD9A8;
+    --cream:#FBF5E9; --cream2:#F3E9D3;
+    --ever:#3E5B45; --ever-l:#D5E1D2;
+    --ink:#2B2A28; --line:#D8CDB4; --mute:#6E675C;
+    --serif:Georgia,'Times New Roman',serif;
+    --sans:'Segoe UI',Calibri,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--sans);color:var(--ink);background:var(--stone-d);
+    background-image:
+      radial-gradient(circle at 15% 20%, rgba(181,138,58,.07) 0, transparent 30%),
+      radial-gradient(circle at 85% 60%, rgba(181,138,58,.05) 0, transparent 35%),
+      radial-gradient(circle at 50% 100%, rgba(124,29,29,.06) 0, transparent 45%);
+    min-height:100vh;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;overflow:hidden;min-height:330px;background:#201E1B}
+  .hero svg.scene{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .hero .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,18,16,.55) 0%,rgba(20,18,16,.15) 45%,rgba(20,18,16,.55) 100%)}
+  .hero-inner{position:relative;z-index:3;max-width:1180px;margin:0 auto;padding:44px 24px 26px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px}
+  .hero h1{font-family:var(--serif);font-size:clamp(28px,4.5vw,50px);color:var(--cream);letter-spacing:.5px;text-shadow:0 2px 18px rgba(0,0,0,.75),0 1px 3px rgba(0,0,0,.9)}
+  .hero .sub{font-family:var(--serif);font-style:italic;color:var(--gold-l);font-size:clamp(13px,1.6vw,17px);text-shadow:0 1px 8px rgba(0,0,0,.8)}
+  .hero .rule{width:220px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:2px 0 6px}
+  .hero-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:6px}
+  .snowlayer{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+  .flake{position:absolute;top:-12px;color:#fff;opacity:.75;animation:fall linear infinite;user-select:none}
+  @keyframes fall{
+    0%{transform:translateY(-15px) translateX(0)}
+    50%{transform:translateY(28vh) translateX(14px)}
+    100%{transform:translateY(60vh) translateX(-8px);opacity:0}
+  }
+
+  /* ---------- BUTTONS ---------- */
+  .btn{font-family:var(--sans);font-size:13px;font-weight:600;padding:9px 16px;border-radius:8px;cursor:pointer;border:1px solid var(--gold);background:rgba(43,42,40,.72);color:var(--gold-l);transition:.18s;letter-spacing:.3px}
+  .btn:hover{background:var(--gold);color:var(--stone-d)}
+  .btn.primary{background:var(--crimson);border-color:var(--gold);color:var(--cream)}
+  .btn.primary:hover{background:var(--crimson-d)}
+  .btn.small{padding:5px 11px;font-size:12px}
+  .btn.ghost{background:transparent;border-color:var(--line);color:var(--stone2)}
+  .btn.ghost:hover{background:var(--cream2);color:var(--ink)}
+  .pulse{animation:pulse 2.2s ease-in-out infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(181,138,58,.55)}50%{box-shadow:0 0 0 9px rgba(181,138,58,0)}}
+
+  /* ---------- NAV TABS ---------- */
+  nav.tabs{position:sticky;top:0;z-index:40;background:var(--stone);border-bottom:2px solid var(--gold);box-shadow:0 3px 14px rgba(0,0,0,.45)}
+  .tabs-inner{max-width:1180px;margin:0 auto;display:flex;overflow-x:auto;scrollbar-width:none}
+  .tabs-inner::-webkit-scrollbar{display:none}
+  .tab-btn{flex:0 0 auto;font-family:var(--serif);font-size:14.5px;color:var(--cream2);background:none;border:none;border-bottom:3px solid transparent;padding:14px 18px;cursor:pointer;transition:.15s;white-space:nowrap}
+  .tab-btn:hover{color:var(--gold-l);background:rgba(181,138,58,.08)}
+  .tab-btn.active{color:var(--gold-l);border-bottom-color:var(--gold);background:rgba(181,138,58,.1)}
+
+  /* ---------- LAYOUT ---------- */
+  main{max-width:1180px;margin:26px auto 60px;padding:0 16px}
+  .panel{background:var(--cream);border:1px solid var(--gold);border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.5);overflow:hidden;margin-bottom:26px}
+  .panel-head{background:var(--stone);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;border-bottom:3px solid var(--gold)}
+  .panel-head h2{font-family:var(--serif);color:var(--cream);font-size:19px;font-weight:700}
+  .panel-head .hint{font-family:var(--serif);font-style:italic;color:var(--gold-l);font-size:12.5px}
+  .panel-body{padding:18px 20px}
+  .section-bar{background:var(--crimson);color:var(--cream);font-family:var(--serif);font-size:15px;font-weight:700;padding:9px 16px;border-radius:8px 8px 0 0;margin-top:18px}
+  .tabpage{display:none}
+  .tabpage.active{display:block;animation:fadein .25s ease}
+  @keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  /* ---------- METRICS ---------- */
+  .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+  .metric{background:#fff;border:1.5px solid var(--gold);border-radius:12px;padding:16px 12px;text-align:center;position:relative;overflow:hidden}
+  .metric::after{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-l),var(--gold))}
+  .metric .lbl{font-size:11px;font-weight:700;letter-spacing:1.4px;color:var(--stone2);text-transform:uppercase}
+  .metric .val{font-family:var(--serif);font-size:40px;font-weight:700;color:var(--crimson);line-height:1.15}
+  .metric.green .val{color:var(--ever)}
+  .metric.gold .val{color:var(--gold-d)}
+  .progress-wrap{margin-top:16px;background:#fff;border:1.5px solid var(--gold);border-radius:12px;padding:16px 18px}
+  .progress-top{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px}
+  .progress-top .pct{font-family:var(--serif);font-size:34px;font-weight:700;color:var(--ever)}
+  .progress-top .cap{color:var(--mute);font-size:13px}
+  .bar{height:16px;background:var(--cream2);border:1px solid var(--line);border-radius:99px;overflow:hidden;margin-top:8px}
+  .bar > div{height:100%;background:linear-gradient(90deg,var(--ever),#4d7256);border-radius:99px;transition:width .5s ease;min-width:0}
+
+  /* ---------- TABLES ---------- */
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:0 0 10px 10px}
+  table{width:100%;border-collapse:collapse;font-size:13px;min-width:640px}
+  thead th{background:var(--crimson);color:var(--cream);font-family:var(--sans);font-size:11.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;padding:10px 10px;text-align:left;border:1px solid rgba(181,138,58,.5);position:sticky;top:0}
+  tbody td{padding:8px 10px;border:1px solid var(--line);vertical-align:top;background:var(--cream)}
+  tbody tr:nth-child(even) td{background:var(--cream2)}
+  tbody tr:hover td{background:#f6ecd6}
+  td.month-cell{font-family:var(--serif);font-weight:700;color:var(--crimson);font-size:11.5px;white-space:nowrap}
+  td .task-name{font-weight:700}
+  td .detail{color:var(--mute);font-size:12px;margin-top:2px;line-height:1.4}
+  td.overdue{color:var(--crimson);font-weight:700}
+  td.overdue::after{content:" ⚠";font-size:11px}
+  tfoot td{background:var(--stone);color:var(--gold-l);font-family:var(--serif);font-weight:700;padding:9px 10px;border:1px solid var(--gold)}
+
+  /* inline editors */
+  .cell-in{width:100%;border:none;background:transparent;font:inherit;color:var(--ink);padding:2px 0;border-bottom:1px dashed transparent;outline:none;min-width:70px}
+  .cell-in:hover{border-bottom-color:var(--line)}
+  .cell-in:focus{border-bottom-color:var(--gold)}
+  textarea.cell-in{resize:vertical;min-height:22px;line-height:1.35}
+  input[type=date].cell-in{min-width:120px}
+  input[type=number].cell-in{min-width:80px;text-align:right}
+
+  /* status pills */
+  select.pill{appearance:none;-webkit-appearance:none;border:none;border-radius:999px;font-size:11.5px;font-weight:700;padding:5px 12px;cursor:pointer;outline:none;text-align:center;font-family:var(--sans);min-width:104px}
+  .pill.st-not{background:#ECE4D2;color:var(--stone2)}
+  .pill.st-prog{background:var(--gold-l);color:var(--stone)}
+  .pill.st-done{background:var(--ever);color:#fff}
+  .pill.st-block{background:var(--crimson);color:#fff}
+  .pill.st-na{background:#DDD8CC;color:var(--mute)}
+  .pill.yn-yes{background:var(--ever);color:#fff}
+  .pill.yn-no{background:#ECE4D2;color:var(--stone2)}
+  .pill.yn-mid{background:var(--gold-l);color:var(--stone)}
+
+  /* filters */
+  .filters{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding:14px 0}
+  .filters select,.filters input[type=search]{font:inherit;font-size:13px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);outline:none}
+  .filters select:focus,.filters input:focus{border-color:var(--gold)}
+  .filters input[type=search]{flex:1;min-width:160px}
+
+  /* month progress rows */
+  .mrow{display:grid;grid-template-columns:130px 1fr 92px;gap:12px;align-items:center;padding:8px 4px;border-bottom:1px solid var(--line)}
+  .mrow:last-child{border-bottom:none}
+  .mrow .mname{font-family:var(--serif);font-weight:700;color:var(--crimson);font-size:13px}
+  .mrow .mbar{height:12px;background:var(--cream2);border:1px solid var(--line);border-radius:99px;overflow:hidden}
+  .mrow .mbar>div{height:100%;background:var(--ever);border-radius:99px;transition:width .4s}
+  .mrow .mnum{font-size:12px;color:var(--mute);text-align:right}
+
+  .up-item{display:flex;gap:12px;align-items:flex-start;padding:9px 4px;border-bottom:1px solid var(--line)}
+  .up-item:last-child{border-bottom:none}
+  .up-date{font-family:var(--serif);font-weight:700;color:var(--gold-d);font-size:12.5px;white-space:nowrap;min-width:76px}
+  .up-date.late{color:var(--crimson)}
+  .up-task{font-size:13px}
+  .up-task small{display:block;color:var(--mute)}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media(max-width:840px){.grid2{grid-template-columns:1fr}}
+
+  .add-row{margin:12px 0 2px}
+  .del{border:none;background:none;color:var(--mute);cursor:pointer;font-size:15px;padding:2px 6px;border-radius:6px}
+  .del:hover{color:var(--crimson);background:rgba(124,29,29,.08)}
+
+  /* toast */
+  #toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(70px);background:var(--stone);color:var(--gold-l);border:1px solid var(--gold);font-size:13px;padding:9px 18px;border-radius:99px;transition:.3s;z-index:90;box-shadow:0 6px 24px rgba(0,0,0,.5)}
+  #toast.show{transform:translateX(-50%) translateY(0)}
+
+  /* floating guide button */
+  #guideFab{position:fixed;right:20px;bottom:20px;z-index:60;border-radius:999px;padding:12px 20px;font-size:14px;box-shadow:0 8px 26px rgba(0,0,0,.55)}
+
+  /* ---------- TOUR ---------- */
+  #tourSpot{position:fixed;z-index:100;border-radius:12px;box-shadow:0 0 0 4000px rgba(15,13,11,.78),0 0 0 3px var(--gold);pointer-events:none;transition:all .35s ease;display:none}
+  #tourTip{position:fixed;z-index:101;max-width:360px;width:calc(100vw - 36px);background:var(--stone);border:1.5px solid var(--gold);border-radius:14px;padding:18px 20px;color:var(--cream);box-shadow:0 16px 50px rgba(0,0,0,.6);display:none}
+  #tourTip h3{font-family:var(--serif);color:var(--gold-l);font-size:17px;margin-bottom:7px}
+  #tourTip p{font-size:13.5px;line-height:1.55;color:var(--cream2)}
+  #tourTip .tour-foot{display:flex;justify-content:space-between;align-items:center;margin-top:14px}
+  #tourTip .steps{font-size:11.5px;color:var(--gold);letter-spacing:1px}
+  #tourTip .tour-btns{display:flex;gap:8px}
+  footer{max-width:1180px;margin:0 auto;padding:0 16px 40px;text-align:center;color:var(--gold-l);font-family:var(--serif);font-style:italic;font-size:13px;opacity:.75}
+  @media(max-width:640px){
+    .hero-inner{padding-top:30px}
+    .panel-body{padding:14px 12px}
+    thead th{font-size:10.5px;padding:8px 6px}
+    tbody td{padding:7px 6px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="hero">
+  <svg class="scene" viewBox="0 0 1600 430" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#171512"/><stop offset=".6" stop-color="#242220"/><stop offset="1" stop-color="#2B2A28"/>
+      </linearGradient>
+      <radialGradient id="glow" cx=".5" cy=".5" r=".5">
+        <stop offset="0" stop-color="#F4D48A" stop-opacity=".95"/><stop offset=".55" stop-color="#D9A94E" stop-opacity=".45"/><stop offset="1" stop-color="#B58A3A" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="lampGlow" cx=".5" cy=".5" r=".5">
+        <stop offset="0" stop-color="#FFE9AE" stop-opacity=".9"/><stop offset="1" stop-color="#FFD97A" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="stoneArch" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#4A453E"/><stop offset="1" stop-color="#38342F"/>
+      </linearGradient>
+      <linearGradient id="door" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#2A2118"/><stop offset="1" stop-color="#1D1712"/>
+      </linearGradient>
+    </defs>
+
+    <rect width="1600" height="430" fill="url(#sky)"/>
+    <!-- bokeh -->
+    <g fill="#EBD9A8">
+      <circle cx="180" cy="90" r="26" opacity=".05"/><circle cx="300" cy="200" r="14" opacity=".07"/>
+      <circle cx="1420" cy="120" r="30" opacity=".05"/><circle cx="1300" cy="240" r="12" opacity=".08"/>
+      <circle cx="90" cy="280" r="18" opacity=".06"/><circle cx="1520" cy="300" r="20" opacity=".06"/>
+      <circle cx="420" cy="70" r="10" opacity=".08"/><circle cx="1180" cy="60" r="12" opacity=".07"/>
+    </g>
+
+    <!-- warm glow behind entry -->
+    <ellipse cx="800" cy="250" rx="330" ry="220" fill="url(#glow)" opacity=".55"/>
+
+    <!-- steps -->
+    <g>
+      <rect x="560" y="392" width="480" height="38" rx="4" fill="#37332E"/>
+      <rect x="560" y="388" width="480" height="8" rx="4" fill="#EFE7D6" opacity=".85"/>
+      <rect x="600" y="366" width="400" height="28" rx="4" fill="#3C3833"/>
+      <rect x="600" y="362" width="400" height="7" rx="3.5" fill="#F3ECDC" opacity=".85"/>
+      <rect x="636" y="342" width="328" height="24" rx="4" fill="#413D37"/>
+      <rect x="636" y="338" width="328" height="6" rx="3" fill="#F6F0E2" opacity=".9"/>
+    </g>
+    <!-- snow drifts -->
+    <ellipse cx="240" cy="428" rx="340" ry="26" fill="#F3ECDC" opacity=".25"/>
+    <ellipse cx="1370" cy="430" rx="360" ry="28" fill="#F3ECDC" opacity=".25"/>
+
+    <!-- arch -->
+    <path d="M642 342 L642 190 A158 158 0 0 1 958 190 L958 342 L920 342 L920 196 A120 120 0 0 0 680 196 L680 342 Z" fill="url(#stoneArch)"/>
+    <!-- keystone -->
+    <path d="M782 30 L818 30 L826 74 L774 74 Z" fill="#4A453E"/>
+    <path d="M660 60 A200 200 0 0 1 940 60 L926 96 A160 160 0 0 0 674 96 Z" fill="#413D37"/>
+    <!-- arch inner shadow -->
+    <path d="M680 342 L680 196 A120 120 0 0 1 920 196 L920 342 Z" fill="#141110"/>
+
+    <!-- transom light -->
+    <path d="M694 196 A106 106 0 0 1 906 196 L906 208 L694 208 Z" fill="#F0CE83" opacity=".85"/>
+    <g stroke="#2A2118" stroke-width="5">
+      <line x1="800" y1="100" x2="800" y2="206"/>
+      <line x1="726" y1="132" x2="760" y2="200"/>
+      <line x1="874" y1="132" x2="840" y2="200"/>
+    </g>
+
+    <!-- doors -->
+    <rect x="694" y="208" width="104" height="134" fill="url(#door)"/>
+    <rect x="802" y="208" width="104" height="134" fill="url(#door)"/>
+    <g fill="none" stroke="#3A2E20" stroke-width="2">
+      <rect x="706" y="222" width="80" height="50" rx="3"/><rect x="706" y="284" width="80" height="46" rx="3"/>
+      <rect x="814" y="222" width="80" height="50" rx="3"/><rect x="814" y="284" width="80" height="46" rx="3"/>
+    </g>
+    <!-- brass handles -->
+    <circle cx="790" cy="282" r="4.5" fill="#D9B36A"/><circle cx="810" cy="282" r="4.5" fill="#D9B36A"/>
+
+    <!-- velvet bow -->
+    <g>
+      <path d="M800 196 C 770 176, 736 180, 738 202 C 740 222, 776 220, 800 206 Z" fill="#7C1D1D"/>
+      <path d="M800 196 C 830 176, 864 180, 862 202 C 860 222, 824 220, 800 206 Z" fill="#8D2424"/>
+      <path d="M800 196 C 778 184, 752 188, 754 202 C 756 216, 782 214, 800 204 Z" fill="#5E1414" opacity=".55"/>
+      <circle cx="800" cy="201" r="10" fill="#5E1414"/>
+      <path d="M793 208 C 786 240, 780 258, 770 274 L 784 274 C 792 254, 796 236, 800 212 Z" fill="#7C1D1D"/>
+      <path d="M807 208 C 814 240, 820 258, 830 274 L 816 274 C 808 254, 804 236, 800 212 Z" fill="#8D2424"/>
+    </g>
+
+    <!-- flocked trees -->
+    <g id="treeL" transform="translate(520,0)">
+      <rect x="-9" y="330" width="18" height="22" fill="#3B2E1F"/>
+      <path d="M0 128 L64 218 L-64 218 Z" fill="#3E5B45"/>
+      <path d="M0 128 L64 218 L-64 218 Z" fill="#FFFFFF" opacity=".13"/>
+      <path d="M0 172 L82 276 L-82 276 Z" fill="#38523E"/>
+      <path d="M0 224 L98 336 L-98 336 Z" fill="#324A38"/>
+      <path d="M-64 218 Q -20 206 64 218 L 58 210 Q 0 200 -58 210 Z" fill="#F3ECDC" opacity=".55"/>
+      <path d="M-82 276 Q 0 262 82 276 L 74 266 Q 0 254 -74 266 Z" fill="#F3ECDC" opacity=".5"/>
+      <path d="M-98 336 Q 0 320 98 336 L 90 326 Q 0 312 -90 326 Z" fill="#F3ECDC" opacity=".5"/>
+      <g fill="#F4D48A">
+        <circle cx="-20" cy="190" r="4"/><circle cx="26" cy="206" r="4"/><circle cx="-44" cy="252" r="4"/>
+        <circle cx="8" cy="242" r="4"/><circle cx="52" cy="262" r="4"/><circle cx="-70" cy="312" r="4"/>
+        <circle cx="-12" cy="300" r="4"/><circle cx="38" cy="316" r="4"/><circle cx="76" cy="326" r="4"/>
+      </g>
+      <g fill="#8D2424">
+        <circle cx="10" cy="192" r="4.5"/><circle cx="-30" cy="228" r="4.5"/><circle cx="34" cy="248" r="4.5"/>
+        <circle cx="-52" cy="292" r="4.5"/><circle cx="14" cy="288" r="4.5"/><circle cx="60" cy="306" r="4.5"/>
+      </g>
+      <path d="M0 112 L8 130 L-8 130 Z" fill="#D9B36A"/>
+    </g>
+    <use href="#treeL" transform="translate(560,0)" x="0" y="0"/>
+
+    <!-- lanterns -->
+    <g id="lantern" transform="translate(628,300)">
+      <ellipse cx="0" cy="34" rx="34" ry="26" fill="url(#lampGlow)" opacity=".8"/>
+      <rect x="-11" y="8" width="22" height="34" rx="3" fill="#4E3B22"/>
+      <rect x="-7" y="13" width="14" height="24" rx="2" fill="#FFE1A0"/>
+      <path d="M-13 8 L13 8 L8 -2 L-8 -2 Z" fill="#4E3B22"/>
+      <circle cx="0" cy="-6" r="3" fill="#4E3B22"/>
+      <rect x="-13" y="42" width="26" height="5" rx="2" fill="#4E3B22"/>
+    </g>
+    <use href="#lantern" transform="translate(344,0)"/>
+
+    <!-- gifts -->
+    <g transform="translate(438,352)">
+      <rect x="0" y="0" width="40" height="34" rx="3" fill="#7C1D1D"/><rect x="17" y="0" width="6" height="34" fill="#EBD9A8"/>
+      <rect x="44" y="8" width="30" height="26" rx="3" fill="#EBD9A8"/><rect x="56" y="8" width="6" height="26" fill="#7C1D1D"/>
+      <rect x="24" y="-16" width="24" height="20" rx="3" fill="#B58A3A"/><rect x="33" y="-16" width="6" height="20" fill="#FBF5E9"/>
+    </g>
+    <g transform="translate(1092,352)">
+      <rect x="0" y="0" width="38" height="34" rx="3" fill="#EBD9A8"/><rect x="16" y="0" width="6" height="34" fill="#7C1D1D"/>
+      <rect x="42" y="6" width="32" height="28" rx="3" fill="#7C1D1D"/><rect x="55" y="6" width="6" height="28" fill="#B58A3A"/>
+      <rect x="20" y="-14" width="22" height="18" rx="3" fill="#B58A3A"/><rect x="28" y="-14" width="6" height="18" fill="#FBF5E9"/>
+    </g>
+
+    <!-- vignette -->
+    <rect width="1600" height="430" fill="url(#sky)" opacity="0" />
+  </svg>
+  <div class="veil"></div>
+  <div class="snowlayer" id="snowlayer"></div>
+  <div class="hero-inner" id="tour-hero">
+    <h1>Bentwater Holiday Home Tour</h1>
+    <div class="rule"></div>
+    <div class="sub">Committee Task Manager · 2026 Season · two enchanted evenings in December</div>
+    <div class="hero-actions">
+      <button class="btn primary pulse" id="btnGuide">✦ Guide Me</button>
+      <button class="btn" id="btnExport">Export Data</button>
+      <button class="btn" id="btnImport">Import Data</button>
+      <button class="btn ghost" id="btnReset" style="color:var(--cream2)">Reset</button>
+      <input type="file" id="importFile" accept=".json" hidden />
+    </div>
+  </div>
+</header>
+
+<!-- ============ TABS ============ -->
+<nav class="tabs" id="tour-tabs">
+  <div class="tabs-inner">
+    <button class="tab-btn active" data-tab="dashboard">❖ Dashboard</button>
+    <button class="tab-btn" data-tab="tasks">Tasks</button>
+    <button class="tab-btn" data-tab="homes">Homes</button>
+    <button class="tab-btn" data-tab="volunteers">Volunteers</button>
+    <button class="tab-btn" data-tab="tickets">Tickets</button>
+    <button class="tab-btn" data-tab="budget">Budget</button>
+    <button class="tab-btn" data-tab="contacts">Contacts</button>
+  </div>
+</nav>
+
+<main>
+  <!-- ======== DASHBOARD ======== -->
+  <section class="tabpage active" id="page-dashboard">
+    <div class="panel">
+      <div class="panel-head"><h2>Progress Dashboard</h2><span class="hint">updates live as you work the plan</span></div>
+      <div class="panel-body">
+        <div class="metrics" id="metrics"></div>
+        <div class="progress-wrap" id="tour-progress">
+          <div class="progress-top">
+            <div><span class="pct" id="pctDone">0%</span> <span class="cap">of all tasks complete</span></div>
+            <span class="cap" id="pctDetail"></span>
+          </div>
+          <div class="bar"><div id="pctBar" style="width:0%"></div></div>
+        </div>
+        <div class="grid2" style="margin-top:20px">
+          <div>
+            <div class="section-bar">Progress by Month</div>
+            <div style="background:#fff;border:1px solid var(--line);border-top:none;border-radius:0 0 10px 10px;padding:10px 14px" id="monthProgress"></div>
+          </div>
+          <div>
+            <div class="section-bar">Next Deadlines</div>
+            <div style="background:#fff;border:1px solid var(--line);border-top:none;border-radius:0 0 10px 10px;padding:8px 14px" id="upcoming"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== TASKS ======== -->
+  <section class="tabpage" id="page-tasks">
+    <div class="panel">
+      <div class="panel-head"><h2>Master Task Tracker</h2><span class="hint">the committee plan, phase by phase</span></div>
+      <div class="panel-body">
+        <div class="filters" id="tour-filters">
+          <select id="fMonth"><option value="">All months</option></select>
+          <select id="fStatus"><option value="">All statuses</option></select>
+          <input type="search" id="fSearch" placeholder="Search tasks…" />
+        </div>
+        <div class="tbl-wrap">
+          <table id="taskTable">
+            <thead><tr><th style="width:96px">Month</th><th style="min-width:280px">Task</th><th style="width:130px">Owner</th><th style="width:140px">Due</th><th style="width:130px" id="tour-status-col">Status</th><th style="min-width:160px">Notes</th></tr></thead>
+            <tbody id="taskBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== HOMES ======== -->
+  <section class="tabpage" id="page-homes">
+    <div class="panel">
+      <div class="panel-head"><h2>Homes &amp; Homeowners</h2><span class="hint">name, address, email &amp; phone for each of the 4 tour homes</span></div>
+      <div class="panel-body">
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>#</th><th>Homeowner(s)</th><th>Address</th><th>Phone</th><th>Email</th><th>Charity (501c3)</th><th>Photo Day</th><th>Photo</th><th>Bio</th><th>Watercolor</th><th>House Manager / Hostess</th></tr></thead>
+            <tbody id="homesBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== VOLUNTEERS ======== -->
+  <section class="tabpage" id="page-volunteers">
+    <div class="panel">
+      <div class="panel-head"><h2>Volunteers &amp; Shifts</h2><span class="hint">2 tour nights, 4–8 pm · 2.25-hr shifts · 2 parkers per home per shift</span></div>
+      <div class="panel-body">
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Home</th><th>Day</th><th>Shift</th><th>Role</th><th>Name</th><th>Phone</th><th>Email</th><th>Confirmed</th><th></th></tr></thead>
+            <tbody id="volBody"></tbody>
+          </table>
+        </div>
+        <div class="add-row"><button class="btn small primary" id="addVol">+ Add volunteer</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== TICKETS ======== -->
+  <section class="tabpage" id="page-tickets">
+    <div class="panel">
+      <div class="panel-head"><h2>Ticket Bundles</h2><span class="hint">sets of 10 · ticket # on top · track $ turned in</span></div>
+      <div class="panel-body">
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Bundle</th><th>Ticket #s</th><th>Seller</th><th>$ Expected</th><th>$ Turned In</th><th>Reconciled</th><th></th></tr></thead>
+            <tbody id="tixBody"></tbody>
+            <tfoot><tr><td colspan="3" style="text-align:right">Totals</td><td id="tixExp">$0</td><td id="tixIn">$0</td><td colspan="2"></td></tr></tfoot>
+          </table>
+        </div>
+        <div class="add-row"><button class="btn small primary" id="addTix">+ Add bundle</button></div>
+        <div class="section-bar">Sales Points</div>
+        <div class="tbl-wrap" style="border-radius:0 0 10px 10px">
+          <table style="min-width:420px">
+            <thead><tr><th>Location</th><th style="width:130px">Set up?</th></tr></thead>
+            <tbody id="salesBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== BUDGET ======== -->
+  <section class="tabpage" id="page-budget">
+    <div class="panel">
+      <div class="panel-head"><h2>Budget &amp; Charities</h2><span class="hint">net proceeds flow to the homeowners' charities</span></div>
+      <div class="panel-body">
+        <div class="tbl-wrap">
+          <table style="min-width:560px">
+            <thead><tr><th>Item</th><th style="width:120px">Category</th><th style="width:130px">Amount</th><th>Notes</th><th></th></tr></thead>
+            <tbody id="budBody"></tbody>
+          </table>
+        </div>
+        <div class="add-row"><button class="btn small primary" id="addBud">+ Add line</button></div>
+        <div class="metrics" style="margin-top:16px" id="budTotals"></div>
+        <div class="section-bar">Charity Distribution &amp; Donation Letters</div>
+        <div class="tbl-wrap" style="border-radius:0 0 10px 10px">
+          <table style="min-width:560px">
+            <thead><tr><th>Charity (501c3)</th><th>Sponsoring Home</th><th style="width:120px">Amount</th><th style="width:170px">Status</th></tr></thead>
+            <tbody id="charBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== CONTACTS ======== -->
+  <section class="tabpage" id="page-contacts">
+    <div class="panel">
+      <div class="panel-head"><h2>Key Contacts</h2><span class="hint">the people who make the tour happen</span></div>
+      <div class="panel-body">
+        <div class="tbl-wrap">
+          <table style="min-width:640px">
+            <thead><tr><th>Name</th><th>Role</th><th>Phone / Contact</th><th>Notes</th></tr></thead>
+            <tbody id="conBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>Bentwater Ladies Organization · Holiday Home Tour · crafted with warm golden light ✦</footer>
+
+<button class="btn primary pulse" id="guideFab">✦ Guide Me</button>
+<div id="toast">✓ Saved</div>
+<div id="tourSpot"></div>
+<div id="tourTip">
+  <h3 id="tipTitle"></h3>
+  <p id="tipText"></p>
+  <div class="tour-foot">
+    <span class="steps" id="tipSteps"></span>
+    <div class="tour-btns">
+      <button class="btn small ghost" id="tourSkip" style="color:var(--cream2)">Skip</button>
+      <button class="btn small" id="tourPrev">Back</button>
+      <button class="btn small primary" id="tourNext">Next</button>
+    </div>
+  </div>
+</div>
+
+<script>
+"use strict";
+/* ============================== DATA ============================== */
+const MONTHS = ["JAN – JULY","AUG – SEPT","OCTOBER","NOVEMBER","DECEMBER","JANUARY"];
+const STATUSES = ["Not Started","In Progress","Done","Blocked","N/A"];
+const ST_CLASS = {"Not Started":"st-not","In Progress":"st-prog","Done":"st-done","Blocked":"st-block","N/A":"st-na"};
+
+const DEFAULT_TASKS = [
+["JAN – JULY","Create the holiday advertising image","One image, two uses: printed on a 3′ foam posterboard and digital for the BLO website, Bentwater Life, and other advertising.","2026-02-28"],
+["JAN – JULY","Advertise homes needed for the tour","Run the holiday image everywhere — BLO website, Bentwater Life, etc. — to recruit tour homes.","2026-03-31"],
+["JAN – JULY","Secure 4 homes in the community","Record Name, Address, Email & Phone for each homeowner (one line per home on the Homes tab).","2026-05-31"],
+["JAN – JULY","Draft the introductory homeowner email","Confirm participation; request their 501(c)(3) charity of choice; invite them to the homeowner dinner & tour of one another's homes (date & times); give both Holiday Home Tour dates & times, 4–8 pm. See binder for example.","2026-06-01"],
+["JAN – JULY","Have intro email approved by the Board","The Board must approve the letter before it is sent.","2026-06-10"],
+["JAN – JULY","Send intro emails to homeowners","Include that a professional photographer will take photos, and that their charity choice + a bio of home & family are needed for tickets and brochures by July 31.","2026-06-15"],
+["JAN – JULY","Collect charity selections & family/home bios","501(c)(3) charity + bio of their home and family from each homeowner — needed for tickets & brochures by Jul 31.","2026-07-31"],
+["JAN – JULY","Professional photographer shoots each home","Schedule and complete the photos for tickets & brochures by Jul 31.","2026-07-31"],
+["AUG – SEPT","Board approval: tickets, brochures & foam board","Get BLO Board approval of the ticket, brochure, and presentation foam board designs before printing.","2026-08-31"],
+["AUG – SEPT","Print tickets, brochures & presentation foam board","Include the QR code for the home tour map. Everything must be ready before the October BLO meeting.","2026-09-30"],
+["AUG – SEPT","Announce homes at the Aug/Sept BLO meetings","","2026-09-30"],
+["AUG – SEPT","Secure House Managers","One manager per tour home for the event nights.","2026-09-30"],
+["AUG – SEPT","Volunteer sign-up sheet at August BLO meeting","Table + sign-up sheet to start recruiting volunteers.","2026-08-31"],
+["AUG – SEPT","Submit publicity articles per deadlines","BLO website, Bentwater Life, etc.","2026-09-30"],
+["AUG – SEPT","Update the Board at BLO board meetings","Attend board meetings to keep the Board current on the Home Tour.","2026-09-30"],
+["OCTOBER","Tickets & brochures on sale at October BLO","Everything printed and ready to sell at the October BLO meeting.","2026-10-15"],
+["OCTOBER","Number & bundle tickets","Staple each bundle: ticket on top (so # shows), then map & brochure.","2026-10-20"],
+["OCTOBER","Set up ticket-bundle sign-out sheets","Sets of 10; track who has which numbers and that the correct $ comes back.","2026-10-20"],
+["OCTOBER","Meet POA rep & drive the neighborhood","Randy oversees traffic signs; have a traffic pattern in mind first.","2026-10-31"],
+["OCTOBER","Walk homes for hostess & traffic plan","Determine number of hostesses and the in-home traffic pattern per home.","2026-10-31"],
+["NOVEMBER","Ticket sales begin at Holiday Market","Kick off ticket sales at the Holiday Market.","2026-11-07"],
+["NOVEMBER","Distribute tickets to sales points","POA office (checks only), Area Pro Group, Mix & Mingles, Gourmet Group Cocktail Party, BLO bus trips, golf tournaments. Board members sell 10 each.","2026-11-15"],
+["NOVEMBER","Assign hostesses to each home","Some homeowners prefer their own friends as coordinator/hostesses — list who is due at each home.","2026-11-20"],
+["NOVEMBER","Assign parking attendants","Flashlights necessary; aim for 2 per house per shift.","2026-11-20"],
+["NOVEMBER","Post notices & signage","Nextdoor, Facebook, grill area, Women's locker room, Tennis area, Club Reader Board + BLO meetings.","2026-11-20"],
+["NOVEMBER","Give Preview Party hostess invite list","Names, addresses & emails so she can send invitations.","2026-11-20"],
+["NOVEMBER","Finalize volunteer list & email all","Send each volunteer their date, time & location.","2026-11-30"],
+["DECEMBER","Host Preview / Appreciation Party","Tuesday in December — private tour of each other's homes; easels display the framed watercolors.","2026-12-01"],
+["DECEMBER","Distribute Home Coordinator packets","Vests, nametags & anything else needed for the two-day event.","2026-12-05"],
+["DECEMBER","Check weather / rain & booties plan","Check the forecast to decide on booties and an alternate rain plan.","2026-12-07"],
+["DECEMBER","Send volunteer reminder emails","Weekend before the tour; be ready to move/replace anyone who can't help.","2026-12-07"],
+["DECEMBER","Run the tour (Wed & Thu, 4–8 pm)","Two tour nights, 4:00–8:00 pm, in 2.25-hour volunteer shifts.","2026-12-09"],
+["DECEMBER","Collect expenses & finalize budget","Collect all expenses and prepare the final Home Tour budget.","2026-12-20"],
+["DECEMBER","Write donation letters & distribute funds","Donation letters to the charities; distribute the funds.","2026-12-31"],
+["JANUARY","Announce results at BLO meeting","Report the tour's success; thank homeowners & volunteers.","2027-01-31"]
+];
+
+const DEFAULT_STATE = () => ({
+  tasks: DEFAULT_TASKS.map((t,i)=>({id:i, month:t[0], task:t[1], detail:t[2], owner:"", due:t[3], status:"Not Started", notes:""})),
+  homes: Array.from({length:4},(_,i)=>({num:i+1, owners:"", address:"", phone:"", emails:"", charity:"", photoDay:"", photo:"Pending", bio:"Pending", watercolor:"Not started", hostess:""})),
+  volunteers: [],
+  bundles: Array.from({length:5},(_,i)=>({num:i+1, range:"", seller:"", expected:"", turnedIn:"", rec:"No"})),
+  salesPoints: ["Holiday Market","POA office (checks only)","Area Pro Group","Mix & Mingles","Gourmet Group Cocktail Party","BLO bus trips","Golf tournaments","Board members (10 each)"].map(n=>({name:n, done:"No"})),
+  budget: [
+    {item:"Ticket sales (income)",cat:"Income",amount:"",notes:""},
+    {item:"Sponsor donations (income)",cat:"Income",amount:"",notes:""},
+    {item:"Printing – brochures/tickets/maps",cat:"Expense",amount:"",notes:""},
+    {item:"Watercolors / framing",cat:"Expense",amount:"",notes:""},
+    {item:"Volunteer vests & nametags",cat:"Expense",amount:"",notes:""},
+    {item:"Booties / rain supplies",cat:"Expense",amount:"",notes:""},
+    {item:"Appreciation & Preview parties",cat:"Expense",amount:"",notes:""},
+    {item:"Signage & easels",cat:"Expense",amount:"",notes:""}
+  ],
+  charities: Array.from({length:4},()=>({charity:"", home:"", amount:"", status:"Not started"})),
+  contacts: [
+    {name:"Randy", role:"POA representative (traffic signs / route)", phone:"936-446-8391", notes:"Meet before finalizing traffic pattern; POA maintenance bldg."},
+    {name:"Annette Young", role:"Home Tour artist (watercolors)", phone:"", notes:"Confirm availability early; needs photos by Jul 31."},
+    {name:"Pat Wright", role:"Bentwater Life communications", phone:"", notes:"November publication — blurb & article deadlines."},
+    {name:"Luann Banks", role:"QR-code map creator", phone:"", notes:"Made the QR code that doubles as the tour map."},
+    {name:"Printer", role:"Brochures / tickets / maps", phone:"", notes:"Info by mid-Sep; folds brochures/maps & cuts tickets."},
+    {name:"BLO President", role:"Donations to fund the tour", phone:"", notes:"Usually solicits the funding donations."},
+    {name:"Prior HHT Chair", role:"Preview Party host", phone:"", notes:"Usually hosts; confirm & give headcount estimate."}
+  ]
+});
+
+const KEY = "bentwater-hht-2026-v2";
+let S;
+try { S = Object.assign(DEFAULT_STATE(), JSON.parse(localStorage.getItem(KEY) || "null") || {}); }
+catch(e){ S = DEFAULT_STATE(); }
+
+/* ============================== HELPERS ============================== */
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let saveTimer, toastTimer;
+function save(){
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(()=>{
+    localStorage.setItem(KEY, JSON.stringify(S));
+    const t = $("#toast"); t.classList.add("show");
+    clearTimeout(toastTimer); toastTimer = setTimeout(()=>t.classList.remove("show"), 1100);
+  }, 500);
+}
+function today(){ const d = new Date(); d.setHours(0,0,0,0); return d; }
+function isOverdue(t){ return t.due && t.status!=="Done" && t.status!=="N/A" && new Date(t.due+"T00:00:00") < today(); }
+function fmtDate(iso){ if(!iso) return "—"; const d=new Date(iso+"T00:00:00"); return d.toLocaleDateString("en-US",{month:"short",day:"numeric"}); }
+function money(v){ const n=parseFloat(v); return isNaN(n)?"$0":"$"+n.toLocaleString("en-US",{maximumFractionDigits:0}); }
+function pillSel(cls, options, val, attrs){
+  return `<select class="pill ${cls}" ${attrs}>${options.map(o=>`<option ${o===val?"selected":""}>${esc(o)}</option>`).join("")}</select>`;
+}
+function ynClass(v){ return v==="Yes"?"yn-yes":(v==="Pending"||v==="Tentative"||v==="In progress"||v==="Photo sent")?"yn-mid":(v==="Complete"||v==="Framed"||v==="Funds distributed")?"yn-yes":(v==="Letter sent")?"yn-mid":"yn-no"; }
+function inp(coll,i,field,val,ph,type){
+  type = type||"text";
+  return `<input class="cell-in" type="${type}" data-c="${coll}" data-i="${i}" data-f="${field}" value="${esc(val)}" placeholder="${ph||""}" />`;
+}
+
+/* ============================== DASHBOARD ============================== */
+function renderDashboard(){
+  const T = S.tasks;
+  const done = T.filter(t=>t.status==="Done").length;
+  const prog = T.filter(t=>t.status==="In Progress").length;
+  const block = T.filter(t=>t.status==="Blocked").length;
+  const late = T.filter(isOverdue).length;
+  const countable = T.filter(t=>t.status!=="N/A").length || 1;
+  const pct = Math.round(done/countable*100);
+  $("#metrics").innerHTML = `
+    <div class="metric"><div class="lbl">Total Tasks</div><div class="val" style="color:var(--stone)">${T.length}</div></div>
+    <div class="metric green"><div class="lbl">Complete</div><div class="val">${done}</div></div>
+    <div class="metric gold"><div class="lbl">In Progress</div><div class="val">${prog}</div></div>
+    <div class="metric"><div class="lbl">Blocked</div><div class="val">${block}</div></div>
+    <div class="metric"><div class="lbl">Overdue</div><div class="val">${late}</div></div>`;
+  $("#pctDone").textContent = pct+"%";
+  $("#pctBar").style.width = pct+"%";
+  $("#pctDetail").textContent = `${done} of ${countable} tasks`;
+
+  $("#monthProgress").innerHTML = MONTHS.map(m=>{
+    const mt = T.filter(t=>t.month===m);
+    const md = mt.filter(t=>t.status==="Done").length;
+    const mp = mt.length? Math.round(md/mt.length*100):0;
+    return `<div class="mrow"><span class="mname">${esc(m)}</span><div class="mbar"><div style="width:${mp}%"></div></div><span class="mnum">${md}/${mt.length} · ${mp}%</span></div>`;
+  }).join("");
+
+  const up = T.filter(t=>t.status!=="Done"&&t.status!=="N/A"&&t.due)
+    .sort((a,b)=>a.due.localeCompare(b.due)).slice(0,7);
+  $("#upcoming").innerHTML = up.length ? up.map(t=>
+    `<div class="up-item"><span class="up-date ${isOverdue(t)?"late":""}">${fmtDate(t.due)}</span><span class="up-task">${esc(t.task)}<small>${esc(t.month)}${t.owner?" · "+esc(t.owner):""}</small></span></div>`
+  ).join("") : `<div class="up-item"><span class="up-task">All caught up — pour the cocoa. 🍫</span></div>`;
+}
+
+/* ============================== TASKS ============================== */
+function renderTasks(){
+  const fm = $("#fMonth").value, fs = $("#fStatus").value, q = $("#fSearch").value.toLowerCase();
+  $("#taskBody").innerHTML = S.tasks.filter(t=>
+    (!fm||t.month===fm) && (!fs||t.status===fs) &&
+    (!q|| (t.task+" "+t.detail+" "+t.owner+" "+t.notes).toLowerCase().includes(q))
+  ).map(t=>`
+    <tr>
+      <td class="month-cell">${esc(t.month)}</td>
+      <td><div class="task-name">${esc(t.task)}</div><div class="detail">${esc(t.detail)}</div></td>
+      <td>${inp("tasks",t.id,"owner",t.owner,"assign…")}</td>
+      <td class="${isOverdue(t)?"overdue":""}">${inp("tasks",t.id,"due",t.due,"","date")}</td>
+      <td>${pillSel(ST_CLASS[t.status], STATUSES, t.status, `data-c="tasks" data-i="${t.id}" data-f="status"`)}</td>
+      <td>${inp("tasks",t.id,"notes",t.notes,"notes…")}</td>
+    </tr>`).join("");
+}
+
+/* ============================== HOMES ============================== */
+const WATER = ["Not started","Photo sent","In progress","Complete","Framed"];
+function renderHomes(){
+  $("#homesBody").innerHTML = S.homes.map((h,i)=>`
+    <tr>
+      <td class="month-cell" style="font-size:15px">${h.num}</td>
+      <td>${inp("homes",i,"owners",h.owners,"names…")}</td>
+      <td>${inp("homes",i,"address",h.address,"address…")}</td>
+      <td>${inp("homes",i,"phone",h.phone,"phone…")}</td>
+      <td>${inp("homes",i,"emails",h.emails,"emails…")}</td>
+      <td>${inp("homes",i,"charity",h.charity,"501c3…")}</td>
+      <td>${inp("homes",i,"photoDay",h.photoDay,"","date")}</td>
+      <td>${pillSel(ynClass(h.photo),["Pending","Yes","No"],h.photo,`data-c="homes" data-i="${i}" data-f="photo"`)}</td>
+      <td>${pillSel(ynClass(h.bio),["Pending","Yes","No"],h.bio,`data-c="homes" data-i="${i}" data-f="bio"`)}</td>
+      <td>${pillSel(ynClass(h.watercolor),WATER,h.watercolor,`data-c="homes" data-i="${i}" data-f="watercolor"`)}</td>
+      <td>${inp("homes",i,"hostess",h.hostess,"who…")}</td>
+    </tr>`).join("");
+}
+
+/* ============================== VOLUNTEERS ============================== */
+function renderVols(){
+  $("#volBody").innerHTML = S.volunteers.map((v,i)=>`
+    <tr>
+      <td>${pillSel("st-not",["","Home 1","Home 2","Home 3","Home 4","Floater"],v.home,`data-c="volunteers" data-i="${i}" data-f="home" style="min-width:88px;background:var(--cream2);color:var(--ink)"`)}</td>
+      <td>${pillSel("st-not",["","Wed","Thu","Both"],v.day,`data-c="volunteers" data-i="${i}" data-f="day" style="min-width:70px;background:var(--cream2);color:var(--ink)"`)}</td>
+      <td>${pillSel("st-not",["","4:00–6:15","5:45–8:00","Setup","Teardown"],v.shift,`data-c="volunteers" data-i="${i}" data-f="shift" style="min-width:100px;background:var(--cream2);color:var(--ink)"`)}</td>
+      <td>${pillSel("st-not",["","House Manager","Hostess","Coordinator","Parking","Greeter","Ticket table"],v.role,`data-c="volunteers" data-i="${i}" data-f="role" style="min-width:100px;background:var(--cream2);color:var(--ink)"`)}</td>
+      <td>${inp("volunteers",i,"name",v.name,"name…")}</td>
+      <td>${inp("volunteers",i,"phone",v.phone,"phone…")}</td>
+      <td>${inp("volunteers",i,"email",v.email,"email…")}</td>
+      <td>${pillSel(ynClass(v.confirmed),["No","Tentative","Yes"],v.confirmed,`data-c="volunteers" data-i="${i}" data-f="confirmed"`)}</td>
+      <td><button class="del" data-del="volunteers" data-i="${i}" title="Remove">✕</button></td>
+    </tr>`).join("");
+}
+
+/* ============================== TICKETS ============================== */
+function renderTix(){
+  $("#tixBody").innerHTML = S.bundles.map((b,i)=>`
+    <tr>
+      <td class="month-cell" style="font-size:14px">${b.num}</td>
+      <td>${inp("bundles",i,"range",b.range,"e.g. 101–110")}</td>
+      <td>${inp("bundles",i,"seller",b.seller,"seller…")}</td>
+      <td>${inp("bundles",i,"expected",b.expected,"0","number")}</td>
+      <td>${inp("bundles",i,"turnedIn",b.turnedIn,"0","number")}</td>
+      <td>${pillSel(ynClass(b.rec),["No","Yes"],b.rec,`data-c="bundles" data-i="${i}" data-f="rec"`)}</td>
+      <td><button class="del" data-del="bundles" data-i="${i}" title="Remove">✕</button></td>
+    </tr>`).join("");
+  const exp = S.bundles.reduce((a,b)=>a+(parseFloat(b.expected)||0),0);
+  const got = S.bundles.reduce((a,b)=>a+(parseFloat(b.turnedIn)||0),0);
+  $("#tixExp").textContent = money(exp);
+  $("#tixIn").textContent = money(got);
+  $("#salesBody").innerHTML = S.salesPoints.map((p,i)=>`
+    <tr><td>${esc(p.name)}</td><td>${pillSel(ynClass(p.done),["No","Yes"],p.done,`data-c="salesPoints" data-i="${i}" data-f="done"`)}</td></tr>`).join("");
+}
+
+/* ============================== BUDGET ============================== */
+function renderBudget(){
+  $("#budBody").innerHTML = S.budget.map((b,i)=>`
+    <tr>
+      <td>${inp("budget",i,"item",b.item,"item…")}</td>
+      <td>${pillSel(b.cat==="Income"?"st-done":"st-block",["Income","Expense"],b.cat,`data-c="budget" data-i="${i}" data-f="cat"`)}</td>
+      <td>${inp("budget",i,"amount",b.amount,"0","number")}</td>
+      <td>${inp("budget",i,"notes",b.notes,"")}</td>
+      <td><button class="del" data-del="budget" data-i="${i}" title="Remove">✕</button></td>
+    </tr>`).join("");
+  const inc = S.budget.filter(b=>b.cat==="Income").reduce((a,b)=>a+(parseFloat(b.amount)||0),0);
+  const exp = S.budget.filter(b=>b.cat==="Expense").reduce((a,b)=>a+(parseFloat(b.amount)||0),0);
+  $("#budTotals").innerHTML = `
+    <div class="metric green"><div class="lbl">Total Income</div><div class="val" style="font-size:30px">${money(inc)}</div></div>
+    <div class="metric"><div class="lbl">Total Expense</div><div class="val" style="font-size:30px">${money(exp)}</div></div>
+    <div class="metric gold"><div class="lbl">Net to Charities</div><div class="val" style="font-size:30px">${money(inc-exp)}</div></div>`;
+  $("#charBody").innerHTML = S.charities.map((c,i)=>`
+    <tr>
+      <td>${inp("charities",i,"charity",c.charity,"charity…")}</td>
+      <td>${inp("charities",i,"home",c.home,"home…")}</td>
+      <td>${inp("charities",i,"amount",c.amount,"0","number")}</td>
+      <td>${pillSel(ynClass(c.status),["Not started","Letter sent","Funds distributed"],c.status,`data-c="charities" data-i="${i}" data-f="status"`)}</td>
+    </tr>`).join("");
+}
+
+/* ============================== CONTACTS ============================== */
+function renderContacts(){
+  $("#conBody").innerHTML = S.contacts.map((c,i)=>`
+    <tr>
+      <td class="month-cell" style="font-size:13px">${esc(c.name)}</td>
+      <td style="color:var(--mute)">${esc(c.role)}</td>
+      <td>${inp("contacts",i,"phone",c.phone,"add contact…")}</td>
+      <td>${inp("contacts",i,"notes",c.notes,"")}</td>
+    </tr>`).join("");
+}
+
+/* ============================== EVENTS ============================== */
+function renderAll(){ renderDashboard(); renderTasks(); renderHomes(); renderVols(); renderTix(); renderBudget(); renderContacts(); }
+
+document.addEventListener("input", e=>{
+  const el = e.target, c = el.dataset.c;
+  if(!c) return;
+  const i = +el.dataset.i, f = el.dataset.f;
+  const row = c==="tasks" ? S.tasks.find(t=>t.id===i) : S[c][i];
+  if(!row) return;
+  row[f] = el.value;
+  save();
+  if(el.tagName==="SELECT"){
+    if(c==="tasks" && f==="status"){ el.className = "pill "+ST_CLASS[el.value]; renderDashboard(); const td = el.closest("tr").children[3]; td.classList.toggle("overdue", isOverdue(row)); }
+    else if(f==="cat"){ renderBudget(); }
+    else { el.className = "pill "+ynClass(el.value); if(c==="budget"||c==="charities") renderBudget(); }
+  }
+  if(c==="tasks" && f==="due"){ renderDashboard(); el.closest("td").classList.toggle("overdue", isOverdue(row)); }
+  if(c==="bundles" && (f==="expected"||f==="turnedIn")){ const exp=S.bundles.reduce((a,b)=>a+(parseFloat(b.expected)||0),0), got=S.bundles.reduce((a,b)=>a+(parseFloat(b.turnedIn)||0),0); $("#tixExp").textContent=money(exp); $("#tixIn").textContent=money(got); }
+  if(c==="budget" && f==="amount"){ const inc=S.budget.filter(b=>b.cat==="Income").reduce((a,b)=>a+(parseFloat(b.amount)||0),0), ex=S.budget.filter(b=>b.cat==="Expense").reduce((a,b)=>a+(parseFloat(b.amount)||0),0); $("#budTotals").querySelectorAll(".val")[0].textContent=money(inc); $("#budTotals").querySelectorAll(".val")[1].textContent=money(ex); $("#budTotals").querySelectorAll(".val")[2].textContent=money(inc-ex); }
+});
+document.addEventListener("click", e=>{
+  const del = e.target.closest("[data-del]");
+  if(del){ S[del.dataset.del].splice(+del.dataset.i,1); save(); renderAll(); }
+});
+$("#addVol").onclick = ()=>{ S.volunteers.push({home:"",day:"",shift:"",role:"",name:"",phone:"",email:"",confirmed:"No"}); save(); renderVols(); };
+$("#addTix").onclick = ()=>{ S.bundles.push({num:S.bundles.length+1,range:"",seller:"",expected:"",turnedIn:"",rec:"No"}); save(); renderTix(); };
+$("#addBud").onclick = ()=>{ S.budget.push({item:"",cat:"Expense",amount:"",notes:""}); save(); renderBudget(); };
+
+/* tabs */
+function goTab(name){
+  $$(".tab-btn").forEach(b=>b.classList.toggle("active", b.dataset.tab===name));
+  $$(".tabpage").forEach(p=>p.classList.toggle("active", p.id==="page-"+name));
+}
+$$(".tab-btn").forEach(b=>b.onclick = ()=>goTab(b.dataset.tab));
+
+/* filters */
+$("#fMonth").innerHTML += MONTHS.map(m=>`<option>${m}</option>`).join("");
+$("#fStatus").innerHTML += STATUSES.map(s=>`<option>${s}</option>`).join("");
+["fMonth","fStatus","fSearch"].forEach(id=>$("#"+id).addEventListener("input", renderTasks));
+
+/* export / import / reset */
+$("#btnExport").onclick = ()=>{
+  const blob = new Blob([JSON.stringify(S,null,2)],{type:"application/json"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "bentwater-home-tour-data.json";
+  a.click(); URL.revokeObjectURL(a.href);
+};
+$("#btnImport").onclick = ()=>$("#importFile").click();
+$("#importFile").onchange = e=>{
+  const f = e.target.files[0]; if(!f) return;
+  const r = new FileReader();
+  r.onload = ()=>{ try{ S = Object.assign(DEFAULT_STATE(), JSON.parse(r.result)); save(); renderAll(); }catch(err){ alert("That file doesn't look like exported tour data."); } };
+  r.readAsText(f); e.target.value="";
+};
+$("#btnReset").onclick = ()=>{ if(confirm("Reset ALL data back to the fresh binder plan? This cannot be undone.")){ localStorage.removeItem(KEY); location.reload(); } };
+
+/* snow */
+(function snow(){
+  const layer = $("#snowlayer"), glyphs=["❄","❅","✦","•"];
+  for(let i=0;i<34;i++){
+    const s = document.createElement("span");
+    s.className="flake"; s.textContent = glyphs[i%glyphs.length];
+    s.style.left = Math.random()*100+"%";
+    s.style.fontSize = (6+Math.random()*11)+"px";
+    s.style.opacity = .25+Math.random()*.55;
+    s.style.animationDuration = (7+Math.random()*9)+"s";
+    s.style.animationDelay = (-Math.random()*14)+"s";
+    layer.appendChild(s);
+  }
+})();
+
+/* ============================== GUIDE-ME TOUR ============================== */
+const TOUR = [
+  {tab:null, sel:null, title:"Welcome to the Home Tour HQ ✦", text:"This is your committee's single source of truth for the Bentwater Holiday Home Tour. Everything from the binder now lives here — and this quick tour shows you around. Use Next, or press → on your keyboard."},
+  {tab:"dashboard", sel:"#metrics", title:"Your season at a glance", text:"These cards count themselves. As tasks get marked Done, In Progress, or Blocked on the Tasks tab, the totals — including anything overdue — update instantly."},
+  {tab:"dashboard", sel:"#tour-progress", title:"Overall completion", text:"The evergreen bar fills as the committee works the plan. N/A tasks are excluded so the percentage stays honest."},
+  {tab:"dashboard", sel:"#monthProgress", title:"Progress by phase", text:"The plan runs Jan–July prep through the January wrap-up. Each phase gets its own bar, so you can see at a glance whether Aug–Sept is keeping pace."},
+  {tab:"dashboard", sel:"#upcoming", title:"Next deadlines", text:"The seven soonest unfinished tasks, sorted by due date. Anything already late shows in velvet red with a warning flag."},
+  {tab:"dashboard", sel:"#tour-tabs", title:"Seven rooms in the house", text:"Dashboard for the view, Tasks for the work, then Homes, Volunteers, Tickets, Budget, and Contacts — each tab mirrors a section of the committee binder."},
+  {tab:"tasks", sel:"#tour-filters", title:"Find any task fast", text:"Filter by month or status, or just type — “Randy”, “brochure”, “tickets” — and the table narrows as you type."},
+  {tab:"tasks", sel:"#taskTable", title:"The master tracker", text:"Every task in the plan with its details. Click any Owner, Due, or Notes cell to edit it in place. Set the Status pill and watch it change color — overdue due-dates flag themselves in red."},
+  {tab:"homes", sel:"#page-homes .panel", title:"Homes & homeowners", text:"One line per tour home: name, address, email & phone, plus their 501(c)(3) charity, the photographer's photo day, the family/home bio, and the watercolor's journey from photo to framed gift."},
+  {tab:"volunteers", sel:"#page-volunteers .panel", title:"Volunteers & shifts", text:"Build your roster here: House Managers, hostesses, parking (aim for two per home per shift — flashlights required!). Add rows as sign-ups come in from the BLO meetings."},
+  {tab:"tickets", sel:"#page-tickets .panel", title:"Tickets & sales points", text:"Sign out bundles of ten, track who has which numbers and the money turned in — totals reconcile automatically. Below, tick off each sales point as it's set up."},
+  {tab:"budget", sel:"#page-budget .panel", title:"Budget & charities", text:"Log income and expenses; the Net-to-Charities figure updates live. The distribution table tracks each charity's donation letter and payout."},
+  {tab:"dashboard", sel:".hero-actions", title:"Sharing with the team", text:"Your work autosaves in this browser. Use Export Data to hand a teammate a snapshot file, and Import Data to load one back in. When the site's on Netlify, everyone uses the same link — same warm little HQ."}
+];
+let tourIdx = -1;
+const spot = $("#tourSpot"), tip = $("#tourTip");
+function endTour(){ tourIdx=-1; spot.style.display="none"; tip.style.display="none"; document.removeEventListener("keydown", tourKeys); }
+function tourKeys(e){
+  if(e.key==="Escape") endTour();
+  else if(e.key==="ArrowRight") tourStep(1);
+  else if(e.key==="ArrowLeft") tourStep(-1);
+}
+function tourStep(dir){
+  const next = tourIdx + dir;
+  if(next<0) return;
+  if(next>=TOUR.length){ endTour(); return; }
+  tourIdx = next;
+  const st = TOUR[tourIdx];
+  if(st.tab) goTab(st.tab);
+  $("#tipTitle").textContent = st.title;
+  $("#tipText").textContent = st.text;
+  $("#tipSteps").textContent = (tourIdx+1)+" / "+TOUR.length;
+  $("#tourPrev").style.visibility = tourIdx===0?"hidden":"visible";
+  $("#tourNext").textContent = tourIdx===TOUR.length-1 ? "Finish ✦" : "Next";
+  tip.style.display="block";
+  if(!st.sel){
+    spot.style.display="none";
+    tip.style.left="50%"; tip.style.top="50%"; tip.style.transform="translate(-50%,-50%)";
+    return;
+  }
+  tip.style.transform="none";
+  const el = document.querySelector(st.sel);
+  if(!el){ spot.style.display="none"; return; }
+  el.scrollIntoView({block:"center", behavior:"smooth"});
+  setTimeout(()=>{
+    const r = el.getBoundingClientRect(), pad=8;
+    spot.style.display="block";
+    spot.style.left=(r.left-pad)+"px"; spot.style.top=(r.top-pad)+"px";
+    spot.style.width=(r.width+pad*2)+"px"; spot.style.height=(r.height+pad*2)+"px";
+    const tipH = tip.offsetHeight||170, tipW = Math.min(360, window.innerWidth-36);
+    let top = r.bottom+pad+14;
+    if(top+tipH > window.innerHeight-16) top = Math.max(16, r.top-pad-tipH-14);
+    let left = Math.min(Math.max(18, r.left), window.innerWidth-tipW-18);
+    tip.style.top=top+"px"; tip.style.left=left+"px";
+  }, 420);
+}
+function startTour(){ tourIdx=-1; document.addEventListener("keydown", tourKeys); tourStep(1); }
+$("#btnGuide").onclick = startTour;
+$("#guideFab").onclick = startTour;
+$("#tourNext").onclick = ()=>tourStep(1);
+$("#tourPrev").onclick = ()=>tourStep(-1);
+$("#tourSkip").onclick = endTour;
+window.addEventListener("resize", ()=>{ if(tourIdx>=0) tourStep(0); });
+
+/* first visit → offer the tour */
+renderAll();
+if(!localStorage.getItem(KEY+":toured")){
+  localStorage.setItem(KEY+":toured","1");
+  setTimeout(startTour, 900);
+}
+</script>
+</body>
+</html>
